@@ -36,6 +36,11 @@ namespace MyToDo
             testDatas.Add(new CustmeColor("#556677", "556677"));
             lstTest.ItemsSource = testDatas;
             dgTest.ItemsSource = testDatas;
+
+            this.DataContext = new BindingTest()
+            {
+                Name = "MtTest"
+            };
         }
     }
 
