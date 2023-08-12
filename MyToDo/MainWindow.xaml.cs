@@ -1,4 +1,5 @@
 ﻿using System;
+using System.CodeDom;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -24,5 +25,30 @@ namespace MyToDo
         {
             InitializeComponent();
         }
+
+        protected override void OnActivated(EventArgs e)
+        {
+            base.OnActivated(e);
+            List<CustmeColor> testDatas = new List<CustmeColor>();
+            testDatas.Add(new CustmeColor("#ff0000", "Red"));
+            testDatas.Add(new CustmeColor("#00ff00", "Green"));
+            testDatas.Add(new CustmeColor("#0000ff", "Blue"));
+            testDatas.Add(new CustmeColor("#556677", "556677"));
+            lstTest.ItemsSource = testDatas;
+            dgTest.ItemsSource = testDatas;
+        }
+    }
+
+    public class CustmeColor
+    {
+        public CustmeColor(string code, string name)
+        {
+            this.Code = code;
+            this.Name = name;
+        }
+
+        public string Code { get; set; }
+
+        public string Name { get; set; }
     }
 }

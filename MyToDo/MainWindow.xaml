@@ -115,7 +115,26 @@
                         <ColumnDefinition />
                         <ColumnDefinition />
                     </Grid.ColumnDefinitions>
-                    <Border Background="Green" Grid.ColumnSpan="2" Margin="5"/>
+                    <Grid Margin="5" Grid.ColumnSpan="2">
+                        <DataGrid x:Name="dgTest" AutoGenerateColumns="False" CanUserAddRows="False">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="Code" Binding="{Binding Code}"/>
+                                <DataGridTextColumn Header="Name" Binding="{Binding Name}"/>
+                                <DataGridTemplateColumn Header="DoSomething">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <StackPanel Orientation="Horizontal">
+                                                <Border Width="10" Height="10" Background="{Binding Code}" />
+                                                <TextBlock Margin="10, 0" Text="{Binding Name}" />
+                                                <Button Background="{Binding Code}" Content="{Binding Name}"/>
+                                            </StackPanel>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </Grid>
+                    <Border BorderBrush="Green" BorderThickness="3" Grid.ColumnSpan="2" Margin="5"/>
                     <Border Background="LightBlue" Grid.Row="1" Margin="5"/>
                     <Border Background="Red" Grid.Row="1" Grid.Column="1" Margin="5"/>
                     <Border Background="Orange" Grid.Row="2" Margin="5"/>
@@ -139,8 +158,20 @@
                         <Button Content="Hello3" />
 
                     </StackPanel>
-                    <Border BorderBrush="BlueViolet" BorderThickness="2" Padding="5" />
-                    <Border Background="#b2434e" Grid.Row="1" Margin="5"/>
+                    <Border BorderBrush="BlueViolet" BorderThickness="3" Margin="5" />
+                    <Grid Grid.Row="1">
+                        <ListBox x:Name="lstTest" Margin="5">
+                            <ListBox.ItemTemplate>
+                                <DataTemplate >
+                                    <StackPanel Orientation="Horizontal">
+                                        <Border Width="10" Height="10" Background="{Binding Code}" />
+                                        <TextBlock Margin="10, 0" Text="{Binding Name}"></TextBlock>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+                        </ListBox>
+                    </Grid>
+                    <Border BorderBrush="#b2434e" Grid.Row="1" Margin="5" BorderThickness="3"/>
                 </Grid>
             </Grid>
             
