@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -8,10 +9,23 @@ using System.Xml.Linq;
 
 namespace MyToDo
 {
-    public class MainViewModel
+    public class MainViewModel : ViewModelBase
     {
+        private string name;
+        public string Name 
+        {
+            get { return name; }
+            set { name = value; OnPropertyChanged(); }
+        }
 
-        public string Name { get; set; }
+        private string title;
+
+        public string Title
+        {
+            get { return title; }
+            set { title = value; OnPropertyChanged(); }
+        }
+
 
         public MainViewModel()
         {
@@ -21,9 +35,11 @@ namespace MyToDo
 
         public MyCommand ShowCommand { get; set; }
 
+
         public void Show()
         {
             Name = "点击了按钮！";
+            Title = "我是标题";
             MessageBox.Show(Name);
         }
     }

@@ -148,6 +148,7 @@
                     <Grid Grid.Row="1" Grid.Column="1" Margin="5">
                         <StackPanel>
                             <TextBox Text="{Binding Name}" Margin="1" />
+                            <TextBox Text="{Binding Title}" Margin="1" />
                             <Button Content="CommandTest" Command="{Binding ShowCommand}"/>
                         </StackPanel>
                     </Grid>

@@ -24,6 +24,7 @@ namespace MyToDo
         public MainWindow()
         {
             InitializeComponent();
+            this.DataContext = new MainViewModel();
         }
 
         protected override void OnActivated(EventArgs e)
@@ -41,8 +42,6 @@ namespace MyToDo
             //{
             //    Name = "MtTest"
             //};
-
-            this.DataContext = new MainViewModel();
         }
     }
 
