@@ -37,10 +37,12 @@ namespace MyToDo
             lstTest.ItemsSource = testDatas;
             dgTest.ItemsSource = testDatas;
 
-            this.DataContext = new BindingTest()
-            {
-                Name = "MtTest"
-            };
+            //this.DataContext = new BindingTest()
+            //{
+            //    Name = "MtTest"
+            //};
+
+            this.DataContext = new MainViewModel();
         }
     }
 
