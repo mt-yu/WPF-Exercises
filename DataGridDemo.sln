@@ -9,11 +9,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataGridDemo.Wpf", "DataGri
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MyToDo", "MyToDo\MyToDo.csproj", "{BAEF5A27-28AC-41A2-81B5-6D76AB8159DA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyToDo.CommunityToolkit.Mvvm", "MyToDo.CommunityToolkit.Mvvm\MyToDo.CommunityToolkit.Mvvm.csproj", "{FE59BD9D-D995-4913-A06F-F907E391414F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MyToDo.CommunityToolkit.Mvvm", "MyToDo.CommunityToolkit.Mvvm\MyToDo.CommunityToolkit.Mvvm.csproj", "{FE59BD9D-D995-4913-A06F-F907E391414F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyToDo.Mvvmlight", "MyToDo.Mvvmlight\MyToDo.Mvvmlight.csproj", "{80C05896-A7DD-4B7C-B42D-2EF60D711A16}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MyToDo.Mvvmlight", "MyToDo.Mvvmlight\MyToDo.Mvvmlight.csproj", "{80C05896-A7DD-4B7C-B42D-2EF60D711A16}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyToDo.Microsoft.Toolkit.Mvvm", "MyToDo.Microsoft.Toolkit.Mvvm\MyToDo.Microsoft.Toolkit.Mvvm.csproj", "{61C8E5F4-5BDB-4BBE-AFE8-2F22C27826EE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MyToDo.Microsoft.Toolkit.Mvvm", "MyToDo.Microsoft.Toolkit.Mvvm\MyToDo.Microsoft.Toolkit.Mvvm.csproj", "{61C8E5F4-5BDB-4BBE-AFE8-2F22C27826EE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyToDo.Resources", "MyToDo.Resources\MyToDo.Resources.csproj", "{7B6879E3-E470-40D6-8B2A-6FDADDCC8534}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,6 +47,10 @@ Global
 		{61C8E5F4-5BDB-4BBE-AFE8-2F22C27826EE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{61C8E5F4-5BDB-4BBE-AFE8-2F22C27826EE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{61C8E5F4-5BDB-4BBE-AFE8-2F22C27826EE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7B6879E3-E470-40D6-8B2A-6FDADDCC8534}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7B6879E3-E470-40D6-8B2A-6FDADDCC8534}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7B6879E3-E470-40D6-8B2A-6FDADDCC8534}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7B6879E3-E470-40D6-8B2A-6FDADDCC8534}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
