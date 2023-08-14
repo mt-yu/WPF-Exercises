@@ -27,7 +27,14 @@ namespace MyToDo.Resources
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
+            // 没使用资源字典
             this.Resources["solidColor"] = new SolidColorBrush(Colors.Blue);
+
+            // 使用资源字典查找
+            var solidColor = App.Current.FindResource("solidColor");
+
+            var style = App.Current.FindResource("defaultButtonStyle");
+
         }
     }
 }

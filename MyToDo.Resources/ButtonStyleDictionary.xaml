@@ -1,0 +1,11 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <SolidColorBrush x:Key="solidColor" Color="Red"/>
+    
+    <Style x:Key="defaultButtonStyle" TargetType="Button">
+        <Setter Property="Foreground" Value="LightGreen"/>
+        <Setter Property="FontSize" Value="15"/>
+    </Style>
+    
+</ResourceDictionary>

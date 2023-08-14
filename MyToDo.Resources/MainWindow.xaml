@@ -6,14 +6,12 @@
         xmlns:local="clr-namespace:MyToDo.Resources"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
-    <Window.Resources>
-        <SolidColorBrush x:Key="solidColor" Color="Red"/>
-    </Window.Resources>
     <Grid>
         <StackPanel>
             <Button Content="Update" Margin="10" Click="Button_Click"/>
             <Button Content="Button1" Margin="10" Height="40" BorderThickness="5" BorderBrush="{StaticResource solidColor }"/>
             <Button Content="Button2" Margin="10" Height="40" BorderThickness="5"  BorderBrush="{DynamicResource solidColor}"/>
+            <Button Style="{StaticResource defaultButtonStyle}" Content="3344"/>
         </StackPanel>
     </Grid>
 </Window>
