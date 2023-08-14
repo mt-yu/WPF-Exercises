@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyToDo.CommunityToolkit.Mvv
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyToDo.Mvvmlight", "MyToDo.Mvvmlight\MyToDo.Mvvmlight.csproj", "{80C05896-A7DD-4B7C-B42D-2EF60D711A16}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyToDo.Microsoft.Toolkit.Mvvm", "MyToDo.Microsoft.Toolkit.Mvvm\MyToDo.Microsoft.Toolkit.Mvvm.csproj", "{61C8E5F4-5BDB-4BBE-AFE8-2F22C27826EE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{80C05896-A7DD-4B7C-B42D-2EF60D711A16}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{80C05896-A7DD-4B7C-B42D-2EF60D711A16}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{80C05896-A7DD-4B7C-B42D-2EF60D711A16}.Release|Any CPU.Build.0 = Release|Any CPU
+		{61C8E5F4-5BDB-4BBE-AFE8-2F22C27826EE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{61C8E5F4-5BDB-4BBE-AFE8-2F22C27826EE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{61C8E5F4-5BDB-4BBE-AFE8-2F22C27826EE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{61C8E5F4-5BDB-4BBE-AFE8-2F22C27826EE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
