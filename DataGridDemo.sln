@@ -43,6 +43,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyToDo.UsePrism2", "MyToDo.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyToDo.UsePrism2.ModuleA", "MyToDo.UsePrism2.ModuleA\MyToDo.UsePrism2.ModuleA.csproj", "{18FA7790-16AA-46CD-9F1F-7A4378F23EC2}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyToDo.UsePrism2.ModuleB", "MyToDo.UsePrism2.ModuleB\MyToDo.UsePrism2.ModuleB.csproj", "{B791236E-B729-44EB-95FA-D9066C708316}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -117,6 +119,10 @@ Global
 		{18FA7790-16AA-46CD-9F1F-7A4378F23EC2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{18FA7790-16AA-46CD-9F1F-7A4378F23EC2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{18FA7790-16AA-46CD-9F1F-7A4378F23EC2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B791236E-B729-44EB-95FA-D9066C708316}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B791236E-B729-44EB-95FA-D9066C708316}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B791236E-B729-44EB-95FA-D9066C708316}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B791236E-B729-44EB-95FA-D9066C708316}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -13,14 +13,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace MyToDo.UsePrism2.ModuleA
+namespace MyToDo.UsePrism2.ModuleA.Views
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// AView.xaml 的交互逻辑
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class AView : UserControl
     {
-        public MainWindow()
+        public AView()
         {
             InitializeComponent();
         }
