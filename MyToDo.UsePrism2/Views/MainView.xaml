@@ -14,11 +14,11 @@
             <RowDefinition/>
         </Grid.RowDefinitions>
         <StackPanel Height="40" Orientation="Horizontal">
-            <Button Content="打开模块A" Margin="5" Command="{Binding OpenCommand}" CommandParameter="ViewA"/>
-            <Button Content="打开模块B" Margin="5" Command="{Binding OpenCommand}" CommandParameter="ViewB"/>
-            <Button Content="打开模块C" Margin="5" Command="{Binding OpenCommand}" CommandParameter="ViewC"/>
+            <Button Content="打开模块A" Margin="5" Command="{Binding OpenCommand}" CommandParameter="AView"/>
+            <Button Content="打开模块B" Margin="5" Command="{Binding OpenCommand}" CommandParameter="BView"/>
+            <Button Content="打开模块C" Margin="5" Command="{Binding OpenCommand}" CommandParameter="CView"/>
         </StackPanel>
 
-        <ContentControl Grid.Row="1" Content="{Binding Body}"/>
+        <ContentControl Grid.Row="1" prism:RegionManager.RegionName="ContentRegion"/>
     </Grid>
 </Window>

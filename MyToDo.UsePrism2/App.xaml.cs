@@ -17,6 +17,9 @@ namespace MyToDo.UsePrism2
 
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
         {
+            containerRegistry.RegisterForNavigation<AView>();
+            containerRegistry.RegisterForNavigation<BView>();
+            containerRegistry.RegisterForNavigation<CView>();
         }
     }
 }
