@@ -1,4 +1,6 @@
-﻿using Prism.Commands;
+﻿using MyToDo.UsePrism2.ModuleB.Event;
+using Prism.Commands;
+using Prism.Events;
 using Prism.Services.Dialogs;
 using System;
 using System.Collections.Generic;
@@ -10,18 +12,23 @@ namespace MyToDo.UsePrism2.ModuleB.ViewModels
 {
     public class DViewModel : IDialogAware
     {
+        private readonly IEventAggregator aggregator;
+
         public DelegateCommand CancelCommand { get; set; }
         public DelegateCommand SaveCommand { get; set; }
 
-        public DViewModel()
+        public DViewModel(IEventAggregator aggregator)
         {
             CancelCommand = new DelegateCommand(Cancel);
             SaveCommand = new DelegateCommand(OnDialogClosed);
+            this.aggregator = aggregator;
         }
 
         private void Cancel()
         {
-            RequestClose?.Invoke(new DialogResult(ButtonResult.Cancel));
+            //使用MessageEvent 发布一个Hello
+            aggregator.GetEvent<MessageEvent>().Publish("Hello Event");
+            //RequestClose?.Invoke(new DialogResult(ButtonResult.Cancel));
         }
 
         public string Title { get; set; }

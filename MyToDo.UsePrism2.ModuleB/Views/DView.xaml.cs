@@ -1,4 +1,6 @@
-﻿using System;
+﻿using MyToDo.UsePrism2.ModuleB.Event;
+using Prism.Events;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,9 +22,19 @@ namespace MyToDo.UsePrism2.ModuleB.Views
     /// </summary>
     public partial class DView : UserControl
     {
-        public DView()
+        private readonly IEventAggregator aggregator;
+
+        public DView(IEventAggregator aggregator)
         {
             InitializeComponent();
+            this.aggregator = aggregator;
+            this.aggregator.GetEvent<MessageEvent>().Subscribe(SubMessage);
+        }
+
+        private void SubMessage(string msg)
+        {
+            MessageBox.Show($"接受消息:{msg}");
+            aggregator.GetEvent<MessageEvent>().Unsubscribe(SubMessage);
         }
     }
 }
