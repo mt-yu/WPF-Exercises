@@ -2,6 +2,7 @@
 using Prism.Commands;
 using Prism.Mvvm;
 using Prism.Regions;
+using Prism.Services.Dialogs;
 using System;
 
 namespace MyToDo.UsePrism2.ViewModels
@@ -9,6 +10,7 @@ namespace MyToDo.UsePrism2.ViewModels
     public class MainViewModel : BindableBase
     {
         private readonly IRegionManager regionManager;
+        private readonly IDialogService dialogService;
 
         /// <summary>
         /// 区域导航日志
@@ -19,17 +21,38 @@ namespace MyToDo.UsePrism2.ViewModels
         public DelegateCommand BackCommand { get; private set; }
 
 
-        public MainViewModel(IRegionManager regionManager)
+        public MainViewModel(IRegionManager regionManager, IDialogService dialogService)
         {
-            OpenCommand = new DelegateCommand<string>(Open);
+            OpenCommand = new DelegateCommand<string>(Open2);
             BackCommand = new DelegateCommand(Back);
             this.regionManager = regionManager;
+            this.dialogService = dialogService;
         }
 
         private void Back()
         {
-            if(journal.CanGoBack)
+            if (journal.CanGoBack)
                 journal.GoBack();
+        }
+
+        private void Open2(string obj)
+        {
+            if (obj == "DView")
+            {
+                DialogParameters keys = new DialogParameters();
+                keys.Add("Title", "测试弹窗");
+                dialogService.ShowDialog(obj, keys, callback => 
+                {
+                    if(callback.Result == ButtonResult.OK) 
+                    {
+                        string result = callback.Parameters.GetValue<string>("Value");
+                    }
+                });
+            }
+            else
+            {
+                Open(obj);
+            }
         }
 
         private void Open(string obj)

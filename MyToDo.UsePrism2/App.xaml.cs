@@ -23,12 +23,20 @@ namespace MyToDo.UsePrism2
             containerRegistry.RegisterForNavigation<CView>();
         }
 
-        protected override IModuleCatalog CreateModuleCatalog()
+        protected override void ConfigureModuleCatalog(IModuleCatalog moduleCatalog)
         {
-            return new DirectoryModuleCatalog()
-            {
-                ModulePath = @".\Modules"
-            };
+            moduleCatalog.AddModule<ModuleA.ModelAProfile>();
+            moduleCatalog.AddModule<ModuleB.ModelBProfile>();
+            base.ConfigureModuleCatalog(moduleCatalog);
         }
+
+        // 文件夹的形式 加载 更符合脱耦合，但是不好调试，暂时不用
+        //protected override IModuleCatalog CreateModuleCatalog()
+        //{
+        //    return new DirectoryModuleCatalog()
+        //    {
+        //        ModulePath = @".\Modules"
+        //    };
+        //}
     }
 }

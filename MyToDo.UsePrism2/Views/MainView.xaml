@@ -17,7 +17,7 @@
             <Button Content="打开模块A" Margin="5" Command="{Binding OpenCommand}" CommandParameter="AView"/>
             <Button Content="打开模块B" Margin="5" Command="{Binding OpenCommand}" CommandParameter="BView"/>
             <Button Content="打开模块C" Margin="5" Command="{Binding OpenCommand}" CommandParameter="CView"/>
-
+            <Button Content="打开弹窗D" Margin="5" Command="{Binding OpenCommand}" CommandParameter="DView"/>
             <Button Content="返回上一步" Margin="5" Command="{Binding BackCommand}"/>
         </StackPanel>
 

@@ -1,4 +1,5 @@
-﻿using MyToDo.UsePrism2.ModuleB.Views;
+﻿using MyToDo.UsePrism2.ModuleB.ViewModels;
+using MyToDo.UsePrism2.ModuleB.Views;
 using Prism.Ioc;
 using Prism.Modularity;
 using System;
@@ -19,6 +20,7 @@ namespace MyToDo.UsePrism2.ModuleB
         public void RegisterTypes(IContainerRegistry containerRegistry)
         {
             containerRegistry.RegisterForNavigation<BView>();
+            containerRegistry.RegisterForNavigation<DView, DViewModel>();
         }
     }
 }

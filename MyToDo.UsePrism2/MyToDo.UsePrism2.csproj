@@ -12,6 +12,11 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\MyToDo.UsePrism2.ModuleA\MyToDo.UsePrism2.ModuleA.csproj" />
+    <ProjectReference Include="..\MyToDo.UsePrism2.ModuleB\MyToDo.UsePrism2.ModuleB.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Update="Modules\MyToDo.UsePrism2.ModuleA.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
