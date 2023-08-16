@@ -11,9 +11,4 @@
     <PackageReference Include="Prism.DryIoc" Version="8.1.97" />
   </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\MyToDo.UsePrism2.ModuleA\MyToDo.UsePrism2.ModuleA.csproj" />
-    <ProjectReference Include="..\MyToDo.UsePrism2.ModuleB\MyToDo.UsePrism2.ModuleB.csproj" />
-  </ItemGroup>
-
 </Project>
