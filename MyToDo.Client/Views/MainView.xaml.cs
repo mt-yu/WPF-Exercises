@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MaterialDesignThemes.Wpf;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -22,6 +23,45 @@ namespace MyToDo.Client.Views
         public MainView()
         {
             InitializeComponent();
+            
+
+            btnMin.Click += (s, e) => { this.WindowState = WindowState.Minimized; };
+            btnMax.Click += (s, e) => 
+            {
+                var btn = (ContentControl)FindName("btnMax");
+                if (this.WindowState == WindowState.Maximized)
+                {
+                    this.WindowState = WindowState.Normal;
+                    ((PackIcon)(btn).Content).Kind = PackIconKind.WindowMaximize;
+                }
+                else
+                {
+                    this.WindowState = WindowState.Maximized;
+                    ((PackIcon)(btn).Content).Kind = PackIconKind.WindowRestore;
+                }
+            };
+            btnClose.Click += (s, e) => { this.Close(); };
+            cloroZone.MouseMove += (s, e) =>
+            {
+                if (e.LeftButton == MouseButtonState.Pressed)
+                {
+                    this.DragMove();
+                }
+            };
+            cloroZone.MouseDoubleClick += (s, e) =>
+            {
+                var btn = (ContentControl)FindName("btnMax");
+                if (this.WindowState == WindowState.Normal)
+                {
+                    this.WindowState = WindowState.Maximized;
+                    ((PackIcon)(btn).Content).Kind = PackIconKind.WindowRestore;
+                }
+                else
+                {
+                    this.WindowState = WindowState.Normal;
+                    ((PackIcon)(btn).Content).Kind = PackIconKind.WindowMaximize;
+                }
+            };
         }
     }
 }
