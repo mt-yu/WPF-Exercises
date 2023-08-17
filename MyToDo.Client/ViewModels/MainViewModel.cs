@@ -1,5 +1,8 @@
 ﻿using MyToDo.Client.Common.Models;
+using MyToDo.Client.Extension;
+using Prism.Commands;
 using Prism.Mvvm;
+using Prism.Regions;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -12,13 +15,43 @@ namespace MyToDo.Client.ViewModels
 {
     public class MainViewModel : BindableBase
     {
-        public MainViewModel()
+        private ObservableCollection<MenuBar> menuBars;
+        private readonly IRegionManager regionManager;
+        private IRegionNavigationJournal journal;
+
+        public MainViewModel(IRegionManager regionManager)
         {
             MenuBars = new ObservableCollection<MenuBar>();
             CreateMenuBar();
+            NavigateCommand = new DelegateCommand<MenuBar>(Navigate);
+            GoBackCommand = new DelegateCommand(() =>
+            {
+                if (journal != null && journal.CanGoBack)
+                    journal.GoBack();
+            });
+
+            GoForwardCommand = new DelegateCommand(() =>
+            {
+                if (journal != null && journal.CanGoForward)
+                    journal.GoForward();
+            });
+            this.regionManager = regionManager;
         }
 
-        private ObservableCollection<MenuBar> menuBars;
+        private void Navigate(MenuBar bar)
+        {
+            if (bar == null || string.IsNullOrEmpty(bar.NameSpace))
+                return;
+
+            regionManager.Regions[PrismManager.MainViewRegionName].RequestNavigate(bar.NameSpace, back => 
+            {
+                journal = back.Context.NavigationService.Journal;
+            });
+        }
+
+        public DelegateCommand<MenuBar> NavigateCommand { get; private set; }
+        public DelegateCommand GoBackCommand { get; private set; }
+        public DelegateCommand GoForwardCommand { get; private set; }
 
         public ObservableCollection<MenuBar> MenuBars
         {

@@ -10,4 +10,11 @@
 
 二.设计首页导航条
 1.参考 MaterialDesign 的demo，直接复制ColorZone 过来进行使用修改即可
-2.
+
+三.绑定菜单
+1. 左侧菜单栏 数据绑定
+
+四.菜单导航
+1. 几个菜单跳转页面的菜单导航
+	1.1 添加 index, memo, todo, settings, 的 view 和 viewmodel
+	1.2 完善左侧菜单点击后的 左侧导航 ListBox

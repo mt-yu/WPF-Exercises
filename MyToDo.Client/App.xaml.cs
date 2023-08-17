@@ -1,4 +1,5 @@
-﻿using MyToDo.Client.Views;
+﻿using MyToDo.Client.ViewModels;
+using MyToDo.Client.Views;
 using Prism.DryIoc;
 using Prism.Ioc;
 using System.Windows;
@@ -17,6 +18,10 @@ namespace MyToDo.Client
 
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
         {
+            containerRegistry.RegisterForNavigation<IndexView, IndexViewModel>();
+            containerRegistry.RegisterForNavigation<ToDoView, ToDoViewModel>();
+            containerRegistry.RegisterForNavigation<MemoView, MemoViewModel>();
+            containerRegistry.RegisterForNavigation<SettingsView, SettingsViewModel>();
         }
     }
 }
