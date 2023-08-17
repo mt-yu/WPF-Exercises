@@ -8,4 +8,6 @@
 4. 创建 web.api 项目
 	4.1 关闭 配置Https 
 
-二.
+二.设计首页导航条
+1.参考 MaterialDesign 的demo，直接复制ColorZone 过来进行使用修改即可
+2.

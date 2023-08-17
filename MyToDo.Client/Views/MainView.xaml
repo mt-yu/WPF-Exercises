@@ -6,6 +6,7 @@
         xmlns:local="clr-namespace:MyToDo.Client.Views"
         mc:Ignorable="d"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:prism="http://prismlibrary.com/"
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
         Background="{DynamicResource MaterialDesignPaper}"
         TextElement.FontWeight="Medium"
@@ -15,6 +16,7 @@
         AllowsTransparency="True"
         WindowStyle="None"
         WindowStartupLocation="CenterScreen"
+        prism:ViewModelLocator.AutoWireViewModel="True"
         Title="MainView" Height="768" Width="1280">
     <Grid>
         <materialDesign:DialogHost DialogTheme="Inherit"
@@ -24,6 +26,28 @@
             <materialDesign:DrawerHost IsLeftDrawerOpen="{Binding ElementName=MenuToggleButton, Path=IsChecked}">
                 <materialDesign:DrawerHost.LeftDrawerContent>
                     <DockPanel MinWidth="220">
+                        <StackPanel Margin="0, 20" DockPanel.Dock="Top">
+                            <Image Source="/Images/user.jpg" Width="50" Height="50">
+                                <Image.Clip>
+                                    <EllipseGeometry Center="25, 25" RadiusX="25" RadiusY="25"/>
+                                </Image.Clip>
+                            </Image>
+                            <TextBlock Text="Immt" Margin="0, 10" HorizontalAlignment="Center"/>
+                        </StackPanel>
+                        <!--<ListBox ItemContainerStyle="{StaticResource CustomListBoxItemSytle}" ItemsSource="{Binding MenuBars}" Margin="0,16,0,16">-->
+                        <ListBox Style="{StaticResource MaterialDesignNavigationPrimaryListBox}" ItemsSource="{Binding MenuBars}" Margin="0,16,0,16">
+                            <ListBox.Resources>
+                                <Style TargetType="ScrollBar" BasedOn="{StaticResource MaterialDesignScrollBarMinimal}" />
+                            </ListBox.Resources>
+                            <ListBox.ItemTemplate>
+                                <DataTemplate>
+                                    <StackPanel Background="Transparent" Orientation="Horizontal">
+                                        <materialDesign:PackIcon Kind="{Binding Icon}" Margin="10, 0, 0 0"/>
+                                        <TextBlock Text="{Binding Title}" Margin="10, 0"/>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+                        </ListBox>
                     </DockPanel>
                 </materialDesign:DrawerHost.LeftDrawerContent>
 
