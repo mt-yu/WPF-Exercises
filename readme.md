@@ -18,3 +18,6 @@
 1. 几个菜单跳转页面的菜单导航
 	1.1 添加 index, memo, todo, settings, 的 view 和 viewmodel
 	1.2 完善左侧菜单点击后的 左侧导航 ListBox
+
+五.设计首页
+1. 首页界面设计
