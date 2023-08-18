@@ -34,7 +34,7 @@
 3. Sql: 暂时选用 sqlite3 用于学习  来演示(不依赖外部环境配置 保证应用运行)
 	3.1 安装 Microsoft.EntityFrameworkCore.Sqlite  nuget
 
-4. 安装 Microsoft.EntityFrameworkCore.Tools 来创建迁移(Migration)
+4. 安装 Microsoft.EntityFrameworkCore.Tools (.net5 还需要安装Design) 来创建迁移(Migration)
 	包括以下操作: 
 	1. Entity Framework Core Tools for the NuGet Package Manager Console in Visual Studio.
 		Enables these commonly used commands:
@@ -63,3 +63,5 @@
 			Build succeeded.
 			To undo this action, use Remove-Migration.
 		```
+		对应项目下会多出 Migrations 文件夹 包含 数据表特征的迁移文件 和 迁移快照
+		5.4.2 Update-Database
