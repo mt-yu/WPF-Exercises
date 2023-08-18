@@ -47,38 +47,43 @@
                 </StackPanel>
 
                 <Button HorizontalAlignment="Right" Content="+ 添加待办" Margin="10, 5" Command="{Binding AddCommand}"/>
+                
+                <ScrollViewer Grid.Row="1">
+                    <ItemsControl ItemsSource="{Binding ToDoDtos}" HorizontalAlignment="Center">
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <WrapPanel />
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
 
-                <ItemsControl Grid.Row="1" ItemsSource="{Binding ToDoDtos}" HorizontalAlignment="Center">
-                    <ItemsControl.ItemsPanel>
-                        <ItemsPanelTemplate>
-                            <WrapPanel />
-                        </ItemsPanelTemplate>
-                    </ItemsControl.ItemsPanel>
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <materialDesign:TransitioningContent OpeningEffect="{materialDesign:TransitionEffect Kind=ExpandIn}">
+<Grid Width="220" MinHeight="180" MaxHeight="250" Margin="10">
 
-                    <ItemsControl.ItemTemplate>
-                        <DataTemplate>
-                            <Grid Width="220" MinHeight="180" MaxHeight="250" Margin="10">
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="auto"/>
-                                    <RowDefinition/>
-                                </Grid.RowDefinitions>
-                                <Border Grid.RowSpan="2" Background="Green">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="auto"/>
+                                        <RowDefinition/>
+                                    </Grid.RowDefinitions>
+                                    <Border Grid.RowSpan="2" Background="Green">
 
-                                </Border>
-                                <materialDesign:PopupBox HorizontalAlignment="Right" Panel.ZIndex="1">
-                                    <Button Content="删除"/>
-                                </materialDesign:PopupBox>
-                                <TextBlock Text="{Binding Title}" Margin="10, 5"/>
-                                <TextBlock Grid.Row="1" Text="{Binding Content}" Margin="10, 5" Opacity=".5"/>
+                                    </Border>
+                                    <materialDesign:PopupBox HorizontalAlignment="Right" Panel.ZIndex="1">
+                                        <Button Content="删除"/>
+                                    </materialDesign:PopupBox>
+                                    <TextBlock Text="{Binding Title}" Margin="10, 5"/>
+                                    <TextBlock Grid.Row="1" Text="{Binding Content}" Margin="10, 5" Opacity=".5"/>
 
-                                <Canvas Grid.RowSpan="2" ClipToBounds="True">
-                                    <Border Canvas.Top="10" Canvas.Right="-50" CornerRadius="60" Width="120" Height="120" Background="#FFFFFF" Opacity=".1"/>
-                                    <Border Canvas.Top="80" Canvas.Right="-30" CornerRadius="60" Width="120" Height="120" Background="#FFFFFF" Opacity=".1"/>
-                                </Canvas>
-                            </Grid>
-                        </DataTemplate>
-                    </ItemsControl.ItemTemplate>
-                </ItemsControl>
+                                    <Canvas Grid.RowSpan="2" ClipToBounds="True">
+                                        <Border Canvas.Top="10" Canvas.Right="-50" CornerRadius="60" Width="120" Height="120" Background="#FFFFFF" Opacity=".1"/>
+                                        <Border Canvas.Top="80" Canvas.Right="-30" CornerRadius="60" Width="120" Height="120" Background="#FFFFFF" Opacity=".1"/>
+                                    </Canvas>
+                                </Grid>
+                                </materialDesign:TransitioningContent>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </ScrollViewer>
             </Grid>
         </materialDesign:DrawerHost>
     </materialDesign:DialogHost>
