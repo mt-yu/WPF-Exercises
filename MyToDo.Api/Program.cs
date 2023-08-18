@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using MyToDo.Api.Context;
 using MyToDo.Api.Context.Repository;
+using MyToDo.Api.Services;
 
 namespace MyToDo.Api
 {
@@ -20,6 +21,8 @@ namespace MyToDo.Api
             .AddCustomRepository<ToDo, ToDoRepository>()
             .AddCustomRepository<Memo, MemoRepository>()
             .AddCustomRepository<User, UserRepository>();
+
+            builder.Services.AddTransient<IToDoService, ToDoService>();
 
             builder.Services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

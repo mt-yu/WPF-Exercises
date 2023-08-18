@@ -71,4 +71,10 @@
 	6.1 仓储(Repository) 
 		为了解决操作同步问题引入 https://github.com/Arch/UnitOfWork 的部分代码 (封装了大量的仓储模型接口和基础实现)
 		    需要安装 Microsoft.EntityFrameworkCore.AutoHistory 用于 UnitOfWork.SaveChanges
-		
+	6.2 注意这里需要看懂 Unitofwork 具体是做什么，暂时对这个感念还有一些模糊
+
+7. 待办事项接口
+	7.1 创建ToDoController 的控制器  继承 ControllerBase
+
+	7.2 创建 Services 的服务代码 来让 具体的仓储实现 与 控制器进行解耦 IBaseService (具备CRUD 的基本操作)
+		创建 通用的 请求返回类型 ApiResponse

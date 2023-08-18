@@ -1,6 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
-
-namespace MyToDo.Api.Context.Repository
+﻿namespace MyToDo.Api.Context.Repository
 {
     public class ToDoRepository : Repository<ToDo>, IRepository<ToDo>
     {
