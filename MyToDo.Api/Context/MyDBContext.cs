@@ -2,9 +2,9 @@
 
 namespace MyToDo.Api.Context
 {
-    public class MyToDoContext : DbContext
+    public class MyDBContext : DbContext
     {
-        public MyToDoContext(DbContextOptions<MyToDoContext> options) : base(options)
+        public MyDBContext(DbContextOptions<MyDBContext> options) : base(options)
         {
             
         }

@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using MyToDo.Api.Context;
+using MyToDo.Api.Context.Repository;
 
 namespace MyToDo.Api
 {
@@ -10,12 +11,16 @@ namespace MyToDo.Api
             var builder = WebApplication.CreateBuilder(args);
 
             // Add services to the container.
-            builder.Services.AddDbContext<MyToDoContext>(option => 
+            builder.Services.AddDbContext<MyDBContext>(option => 
             {
                 // 从 appsettings.json 中读取链接配置
                 var connectionString = builder.Configuration.GetConnectionString("ToDoConnection");
                 option.UseSqlite(connectionString);
-            });
+            }).AddUnitOfWork<MyDBContext>()
+            .AddCustomRepository<ToDo, ToDoRepository>()
+            .AddCustomRepository<Memo, MemoRepository>()
+            .AddCustomRepository<User, UserRepository>();
+
             builder.Services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();

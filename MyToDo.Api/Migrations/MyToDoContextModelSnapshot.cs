@@ -9,7 +9,7 @@ using MyToDo.Api.Context;
 
 namespace MyToDo.Api.Migrations
 {
-    [DbContext(typeof(MyToDoContext))]
+    [DbContext(typeof(MyDBContext))]
     partial class MyToDoContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)

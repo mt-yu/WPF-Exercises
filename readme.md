@@ -66,3 +66,9 @@
 		对应项目下会多出 Migrations 文件夹 包含 数据表特征的迁移文件 和 迁移快照
 		5.4.2 Update-Database 
 			会生成对应的 to.db 数据库文件 用 Navicat 查看 
+
+6. 创建工作单元	
+	6.1 仓储(Repository) 
+		为了解决操作同步问题引入 https://github.com/Arch/UnitOfWork 的部分代码 (封装了大量的仓储模型接口和基础实现)
+		    需要安装 Microsoft.EntityFrameworkCore.AutoHistory 用于 UnitOfWork.SaveChanges
+		

@@ -10,7 +10,7 @@ using MyToDo.Api.Context;
 
 namespace MyToDo.Api.Migrations
 {
-    [DbContext(typeof(MyToDoContext))]
+    [DbContext(typeof(MyDBContext))]
     [Migration("20230818075605_MyToDo")]
     partial class MyToDo
     {
