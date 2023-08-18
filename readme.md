@@ -64,4 +64,5 @@
 			To undo this action, use Remove-Migration.
 		```
 		对应项目下会多出 Migrations 文件夹 包含 数据表特征的迁移文件 和 迁移快照
-		5.4.2 Update-Database
+		5.4.2 Update-Database 
+			会生成对应的 to.db 数据库文件 用 Navicat 查看 
