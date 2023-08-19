@@ -37,9 +37,7 @@ namespace MyToDo.Client.Services
                 var request = new RestRequest(string.Empty, baseRequest.Method);
                 request.AddHeader("Content-Type", baseRequest.ContentType);
                 if (baseRequest.Parameter != null)
-                {
-                    request.AddParameter("param", JsonConvert.SerializeObject(baseRequest.Parameter), ParameterType.RequestBody);
-                }
+                    request.AddJsonBody(baseRequest.Parameter);
 
                 var builder = new UriBuilder(apiUrl) { Path = baseRequest.Route, Query = baseRequest.Query };
                 var options = new RestClientOptions(builder.Uri);
@@ -60,9 +58,11 @@ namespace MyToDo.Client.Services
                 var request = new RestRequest(string.Empty, baseRequest.Method);
                 request.AddHeader("Content-Type", baseRequest.ContentType);
                 if (baseRequest.Parameter != null)
-                {
-                    request.AddParameter("param", JsonConvert.SerializeObject(baseRequest.Parameter), ParameterType.RequestBody);
-                }
+                    request.AddJsonBody(baseRequest.Parameter);
+                //if (baseRequest.Parameter != null)
+                //{
+                //    request.AddParameter("param", JsonConvert.SerializeObject(baseRequest.Parameter), ParameterType.RequestBody);
+                //}
                 var builder = new UriBuilder(apiUrl) { Path = baseRequest.Route, Query=baseRequest.Query };
                 var options = new RestClientOptions(builder.Uri);
                 using var client = new RestClient(options);

@@ -2,6 +2,7 @@
 using MyToDo.Api.Context;
 using MyToDo.Share.DataTransfers;
 using MyToDo.Share.Parameters;
+using System.Linq.Expressions;
 using System.Reflection.Metadata;
 
 namespace MyToDo.Api.Services
@@ -87,7 +88,18 @@ namespace MyToDo.Api.Services
             try
             {
                 var repository = unitOfWork.GetRepository<Memo>();
-                var memos = await repository.GetPagedListAsync(predicate: p => string.IsNullOrEmpty(parameter.Search) ? true : p.Title.Equals(parameter.Search), pageIndex: parameter.PageIndex, pageSize: parameter.PageSize, orderBy: source => source.OrderByDescending(t => t.CreateDateTime));
+
+                Expression<Func<Memo, bool>> combinedPredicate = p =>
+                (string.IsNullOrEmpty(parameter.Search) ||
+                p.Title.Contains(parameter.Search) ||
+                p.Content.Contains(parameter.Search));
+
+                var memos = await repository.GetPagedListAsync(
+                    predicate: combinedPredicate,
+                    pageIndex: parameter.PageIndex,
+                    pageSize: parameter.PageSize,
+                    orderBy: source => source.OrderByDescending(t => t.CreateDateTime));
+
                 return new ApiResponse(true, memos);
             }
             catch (Exception ex)
