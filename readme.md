@@ -83,3 +83,13 @@
 	通过nuget 安装
 
 9. 查询会涉及到很多参数的情况，在share 中创建一个 Parameters
+
+10. 登录注册接口实现
+	1. 
+
+11. 客户端 接口对接
+	1. 客户端中有许多种方式来对接Api， 取决于Api 的发布方式(web http, web services, wcf, OpenApi, grpc等)
+		直接搜索"管理链接服务" 如果右键依赖项没找到入口的话
+		1. 大部分应用都是通过 http 来访问，
+	2. 安装 Postm 软件，进行接口调试，并且按照里面可以直接获取到对应 code 的 http 访问代码， 其中 C# 又提供了 RestSharp (https://restsharp.dev/) 最流行的 .NET REST API
+	3. 回到软件项目 ，添加 restsharp 的 nuget 库
