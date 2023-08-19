@@ -28,7 +28,7 @@ namespace MyToDo.Api.Controllers
         }
 
         [HttpGet]
-        public async Task<ApiResponse> GetAll([FromQuery] QueryParameter param)
+        public async Task<ApiResponse> GetAll([FromQuery] ToDoParameter param)
         {
             return await service.GetAllAsync(param);
         }

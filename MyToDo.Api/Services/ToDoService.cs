@@ -111,6 +111,34 @@ namespace MyToDo.Api.Services
             }
         }
 
+        public async Task<ApiResponse> GetAllAsync(ToDoParameter parameter)
+        {
+            try
+            {
+                var repository = unitOfWork.GetRepository<ToDo>();
+
+                Expression<Func<ToDo, bool>> combinedPredicate = p =>
+                (string.IsNullOrEmpty(parameter.Search)
+                || p.Title.Contains(parameter.Search)
+                || p.Content.Contains(parameter.Search))
+                && ((parameter.Status == null)
+                || p.Status.Equals(parameter.Status));
+
+                var todos = await repository.GetPagedListAsync(
+                    predicate: combinedPredicate,
+                    pageIndex: parameter.PageIndex,
+                    pageSize: parameter.PageSize,
+                    orderBy: source => source.OrderByDescending(t => t.CreateDateTime));
+
+                return new ApiResponse(true, todos);
+            }
+            catch (Exception ex)
+            {
+
+                return new ApiResponse(ex.Message, false);
+            }
+        }
+
         public async Task<ApiResponse> UpdateAsync(ToDoDto model)
         {
             try

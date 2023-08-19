@@ -1,5 +1,6 @@
 ﻿using MyToDo.Client.Services;
 using MyToDo.Share.DataTransfers;
+using MyToDo.Share.Parameters;
 using Prism.Commands;
 using Prism.Ioc;
 using Prism.Mvvm;
@@ -19,6 +20,8 @@ namespace MyToDo.Client.ViewModels
         private bool isRightDrawerOpen;
         private ToDoDto currentDto;
         private string search;
+        private int selectedIndex;
+
 
 
         public ToDoViewModel(IToDoService service, IContainerProvider containerProvider) : base(containerProvider)
@@ -27,11 +30,12 @@ namespace MyToDo.Client.ViewModels
             this.service = service;
             ExecuteCommand = new DelegateCommand<string>(Execute);
             SelectedCommand = new DelegateCommand<ToDoDto>(Selected);
+            DeleteCommand = new DelegateCommand<ToDoDto>(Delete);
         }
-
 
         public DelegateCommand<string> ExecuteCommand { get; private set; }
         public DelegateCommand<ToDoDto> SelectedCommand { get; private set; }
+        public DelegateCommand<ToDoDto> DeleteCommand { get; private set; }
 
 
         /// <summary>
@@ -65,6 +69,15 @@ namespace MyToDo.Client.ViewModels
         {
             get { return search; }
             set { search = value; RaisePropertyChanged(); }
+        }
+
+        /// <summary>
+        /// 下拉列表选中状态值
+        /// </summary>
+        public int SelectedIndex
+        {
+            get { return selectedIndex; }
+            set { selectedIndex = value; RaisePropertyChanged(); }
         }
 
 
@@ -159,12 +172,34 @@ namespace MyToDo.Client.ViewModels
             }
         }
 
+        private async void Delete(ToDoDto obj)
+        {
+            var deleteResult = await service.DeleteAsync(obj.Id);
+            if (deleteResult.Status)
+            {
+                var model = ToDoDtos.FirstOrDefault(t => t.Id.Equals(obj.Id));
+                if (model != null)
+                {
+                    ToDoDtos.Remove(model);
+                }
+            }
+        }
+
         private async void GetDataAsync()
         {
             try
             {
                 UpdateLoading(true);
-                var todoResult = await service.GetAllAsync(new Share.Parameters.QueryParameter() { PageIndex = 0, PageSize = 100, Search = Search });
+
+                int? status = SelectedIndex == 0 ? null : SelectedIndex == 2 ? 1 : 0;
+
+                var todoResult = await service.GetAllFilterAsync(new ToDoParameter()
+                {
+                    PageIndex = 0,
+                    PageSize = 100,
+                    Search = Search,
+                    Status = status
+                });
 
                 if (todoResult != null && todoResult.Status)
                 {

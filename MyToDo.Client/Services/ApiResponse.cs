@@ -2,6 +2,11 @@
 {
     public class ApiResponse
     {
+        public ApiResponse()
+        {
+            
+        }
+
         public ApiResponse(string message, bool status = true)
         {
             this.Message = message;
@@ -23,6 +28,11 @@
 
     public class ApiResponse<T>
     {
+        public ApiResponse()
+        {
+            
+        }
+
         public ApiResponse(string message, bool status = true)
         {
             this.Message = message;

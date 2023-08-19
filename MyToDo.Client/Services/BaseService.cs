@@ -19,6 +19,9 @@ namespace MyToDo.Client.Services
             this.serviceName = serviceName;
         }
 
+        public HttpRestClient Client { get { return client; } }
+        public string ServiceName { get { return serviceName;} }
+
         public async Task<ApiResponse<Tentity>> AddAsync(Tentity entity)
         {
             BaseRequest request = new BaseRequest();
