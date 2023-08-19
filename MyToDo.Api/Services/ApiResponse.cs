@@ -2,7 +2,7 @@
 {
     public class ApiResponse
     {
-        public ApiResponse(string message, bool status)
+        public ApiResponse(string message, bool status = true)
         {
             this.Message = message;
             this.Status = status;

@@ -26,6 +26,7 @@ namespace MyToDo.Api
 
             builder.Services.AddTransient<IToDoService, ToDoService>();
             builder.Services.AddTransient<IMemoService, MemoService>();
+            builder.Services.AddTransient<ILoginService, LoginService>();
 
             // Ìí¼Ó AutoMapper
             var automapperConfig = new MapperConfiguration(config =>
