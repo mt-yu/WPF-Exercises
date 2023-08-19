@@ -9,6 +9,7 @@
 
   <ItemGroup>
     <None Remove="Images\user.jpg" />
+    <None Remove="Images\公仪楚人.png" />
     <None Remove="Images\水冠.jpg" />
   </ItemGroup>
 
@@ -25,6 +26,7 @@
 
   <ItemGroup>
     <Resource Include="Images\user.jpg" />
+    <Resource Include="Images\公仪楚人.png" />
     <Resource Include="Images\水冠.jpg" />
   </ItemGroup>
 

@@ -1,43 +1,35 @@
 ﻿using MyToDo.Client.Services;
 using MyToDo.Share.DataTransfers;
+using MyToDo.Share.Parameters;
 using Prism.Commands;
 using Prism.Ioc;
-using Prism.Mvvm;
 using Prism.Regions;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MyToDo.Client.ViewModels
 {
     public class MemoViewModel : NavigationViewModel
     {
-        private ObservableCollection<MemoDto> memoDots;
-        private bool isRightDrawerOpen;
         private readonly IMemoService service;
+        private ObservableCollection<MemoDto> toDoDtos;
+        private bool isRightDrawerOpen;
+        private MemoDto currentDto;
+        private string search;
 
         public MemoViewModel(IMemoService service, IContainerProvider containerProvider) : base(containerProvider)
         {
             MemoDtos = new ObservableCollection<MemoDto>();
-            AddCommand = new DelegateCommand(Add);
             this.service = service;
+            ExecuteCommand = new DelegateCommand<string>(Execute);
+            SelectedCommand = new DelegateCommand<MemoDto>(Selected);
+            DeleteCommand = new DelegateCommand<MemoDto>(Delete);
         }
 
-        private void Add()
-        {
-            IsRightDrawerOpen = true;
-        }
-
-        public DelegateCommand AddCommand { get; private set; }
-
-        public ObservableCollection<MemoDto> MemoDtos
-        {
-            get { return memoDots; }
-            set { memoDots = value; RaisePropertyChanged(); }
-        }
+        public DelegateCommand<string> ExecuteCommand { get; private set; }
+        public DelegateCommand<MemoDto> SelectedCommand { get; private set; }
+        public DelegateCommand<MemoDto> DeleteCommand { get; private set; }
 
         /// <summary>
         /// 右侧编辑窗口是否展开
@@ -48,12 +40,153 @@ namespace MyToDo.Client.ViewModels
             set { isRightDrawerOpen = value; RaisePropertyChanged(); }
         }
 
+        public ObservableCollection<MemoDto> MemoDtos
+        {
+            get { return toDoDtos; }
+            set { toDoDtos = value; RaisePropertyChanged(); }
+        }
+
+        /// <summary>
+        /// 编辑选中/新增对象
+        /// </summary>
+        public MemoDto CurrentDto
+        {
+            get { return currentDto; }
+            set { currentDto = value; RaisePropertyChanged(); }
+        }
+
+        /// <summary>
+        /// 搜索条件
+        /// </summary>
+        public string Search
+        {
+            get { return search; }
+            set { search = value; RaisePropertyChanged(); }
+        }
+
+        /// <summary>
+        /// 添加代办
+        /// </summary>
+        private void Execute(string obj)
+        {
+            switch (obj)
+            {
+                case "新增":
+                    Add();
+                    break;
+                case "查询":
+                    Query();
+                    break;
+                case "保存":
+                    Save();
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        private void Add()
+        {
+            CurrentDto = new MemoDto();
+            IsRightDrawerOpen = true;
+        }
+
+        private void Query()
+        {
+            GetDataAsync();
+        }
+
+        private async void Save()
+        {
+            if (string.IsNullOrWhiteSpace(CurrentDto.Title) || string.IsNullOrWhiteSpace(CurrentDto.Content))
+                return;
+
+            try
+            {
+                UpdateLoading(true);
+                // id 大于0 更新， 小于0 添加
+                if (CurrentDto.Id > 0)
+                {
+                    var updateResult = await service.UpdateAsync(CurrentDto);
+                    if (updateResult != null && updateResult.Status)
+                    {
+                        var memo = MemoDtos.FirstOrDefault(t => t.Id == CurrentDto.Id);
+                        if (memo != null)
+                        {
+                            memo.Title = CurrentDto.Title;
+                            memo.Content = CurrentDto.Content;
+                        }
+                        IsRightDrawerOpen = false;
+                    }
+                }
+                else
+                {
+                    var addResult = await service.AddAsync(CurrentDto);
+                    if (addResult != null && addResult.Status)
+                    {
+                        MemoDtos.Add(addResult.Result);
+                        IsRightDrawerOpen = false;
+                    }
+                }
+            }
+            finally
+            {
+                UpdateLoading(false);
+            }
+        }
+
+        private async void Selected(MemoDto memo)
+        {
+            try
+            {
+                UpdateLoading(true);
+                var memoResult = await service.GetFirstOfDefaultAsync(memo.Id);
+
+                if (memoResult != null && memoResult.Status)
+                {
+                    CurrentDto = memoResult.Result;
+                    IsRightDrawerOpen = true;
+                }
+            }
+            finally
+            {
+                UpdateLoading(false);
+            }
+        }
+
+        private async void Delete(MemoDto obj)
+        {
+            try
+            {
+                UpdateLoading(true);
+                var deleteResult = await service.DeleteAsync(obj.Id);
+                if (deleteResult.Status)
+                {
+                    var model = MemoDtos.FirstOrDefault(t => t.Id.Equals(obj.Id));
+                    if (model != null)
+                    {
+                        MemoDtos.Remove(model);
+                    }
+                }
+            }
+            finally
+            {
+                UpdateLoading(false);
+            }
+
+        }
+
         private async void GetDataAsync()
         {
             try
             {
                 UpdateLoading(true);
-                var memoResult = await service.GetAllAsync(new Share.Parameters.QueryParameter() { PageIndex = 0, PageSize = 100 });
+                var memoResult = await service.GetAllAsync(new QueryParameter()
+                {
+                    PageIndex = 0,
+                    PageSize = 100,
+                    Search = Search,
+                });
 
                 if (memoResult != null && memoResult.Status)
                 {
@@ -68,7 +201,6 @@ namespace MyToDo.Client.ViewModels
             {
                 UpdateLoading(false);
             }
-
         }
 
         public override void OnNavigatedTo(NavigationContext navigationContext)
@@ -76,5 +208,6 @@ namespace MyToDo.Client.ViewModels
             base.OnNavigatedTo(navigationContext);
             GetDataAsync();
         }
+
     }
 }
