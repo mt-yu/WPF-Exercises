@@ -1,4 +1,6 @@
 ﻿using MaterialDesignThemes.Wpf;
+using MyToDo.Client.Extension;
+using Prism.Events;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,10 +23,20 @@ namespace MyToDo.Client.Views
     /// </summary>
     public partial class MainView : Window
     {
-        public MainView()
+        public MainView(IEventAggregator aggregator)
         {
             InitializeComponent();
-            
+
+            // 注册等待消息窗口
+            aggregator.Register(arg =>
+            {
+                dialogHost.IsOpen = arg.IsOpen;
+
+                if (dialogHost.IsOpen)
+                {
+                    dialogHost.DialogContent = new ProgressView();
+                }
+            });
 
             btnMin.Click += (s, e) => { this.WindowState = WindowState.Minimized; };
             btnMax.Click += (s, e) => 

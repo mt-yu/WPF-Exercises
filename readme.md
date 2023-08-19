@@ -93,3 +93,7 @@
 		1. 大部分应用都是通过 http 来访问，
 	2. 安装 Postm 软件，进行接口调试，并且按照里面可以直接获取到对应 code 的 http 访问代码， 其中 C# 又提供了 RestSharp (https://restsharp.dev/) 最流行的 .NET REST API
 	3. 回到软件项目 ，添加 restsharp 的 nuget 库
+	1. 
+
+12. 加载数据时 添加加载动画 进度条
+	1. 

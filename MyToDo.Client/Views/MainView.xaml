@@ -21,7 +21,7 @@
         prism:ViewModelLocator.AutoWireViewModel="True"
         Title="MainView" Height="768" Width="1280">
     <Grid>
-        <materialDesign:DialogHost DialogTheme="Inherit"
+        <materialDesign:DialogHost DialogTheme="Inherit" x:Name="dialogHost"
                              Identifier="RootDialog"
                              SnackbarMessageQueue="{Binding ElementName=MainSnackbar, Path=MessageQueue}">
 

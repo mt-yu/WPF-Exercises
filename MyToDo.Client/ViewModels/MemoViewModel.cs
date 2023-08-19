@@ -1,7 +1,9 @@
 ﻿using MyToDo.Client.Services;
 using MyToDo.Share.DataTransfers;
 using Prism.Commands;
+using Prism.Ioc;
 using Prism.Mvvm;
+using Prism.Regions;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -11,18 +13,17 @@ using System.Threading.Tasks;
 
 namespace MyToDo.Client.ViewModels
 {
-    public class MemoViewModel : BindableBase
+    public class MemoViewModel : NavigationViewModel
     {
         private ObservableCollection<MemoDto> memoDots;
         private bool isRightDrawerOpen;
         private readonly IMemoService service;
 
-        public MemoViewModel(IMemoService service)
+        public MemoViewModel(IMemoService service, IContainerProvider containerProvider) : base(containerProvider)
         {
             MemoDtos = new ObservableCollection<MemoDto>();
             AddCommand = new DelegateCommand(Add);
             this.service = service;
-            CreateTestData();
         }
 
         private void Add()
@@ -47,22 +48,33 @@ namespace MyToDo.Client.ViewModels
             set { isRightDrawerOpen = value; RaisePropertyChanged(); }
         }
 
-        private async void CreateTestData()
+        private async void GetDataAsync()
         {
-            //for (int i = 0; i < 10; i++)
-            //{
-            //    MemoDtos.Add(new MemoDto { Title = $"{i}-memo", Content = $"{i}-memo..." });
-            //}
-            var memoResult = await service.GetAllAsync(new Share.Parameters.QueryParameter() { PageIndex = 0, PageSize = 100 });
-
-            if (memoResult != null && memoResult.Status)
+            try
             {
-                MemoDtos.Clear();
-                foreach (var item in memoResult.Result.Items)
+                UpdateLoading(true);
+                var memoResult = await service.GetAllAsync(new Share.Parameters.QueryParameter() { PageIndex = 0, PageSize = 100 });
+
+                if (memoResult != null && memoResult.Status)
                 {
-                    MemoDtos.Add(item);
+                    MemoDtos.Clear();
+                    foreach (var item in memoResult.Result.Items)
+                    {
+                        MemoDtos.Add(item);
+                    }
                 }
             }
+            finally
+            {
+                UpdateLoading(false);
+            }
+
+        }
+
+        public override void OnNavigatedTo(NavigationContext navigationContext)
+        {
+            base.OnNavigatedTo(navigationContext);
+            GetDataAsync();
         }
     }
 }
