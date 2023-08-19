@@ -1,4 +1,6 @@
-﻿namespace MyToDo.Api.Services
+﻿using MyToDo.Share.Parameters;
+
+namespace MyToDo.Api.Services
 {
     /// <summary>
     /// 一般写一些通用的增删改查
@@ -14,7 +16,7 @@
         Task<ApiResponse> AddAsync(T entity);
         Task<ApiResponse> DeleteAsync(int id);
         Task<ApiResponse> UpdateAsync(T entity);
-        Task<ApiResponse> GetAllAsync();
+        Task<ApiResponse> GetAllAsync(QueryParameter parameter);
         Task<ApiResponse> GetAsync(int id);
     }
 }

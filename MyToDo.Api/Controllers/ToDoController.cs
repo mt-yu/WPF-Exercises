@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore.Query.Internal;
 using MyToDo.Api.Context;
 using MyToDo.Api.Services;
 using MyToDo.Share.DataTransfers;
+using MyToDo.Share.Parameters;
 
 namespace MyToDo.Api.Controllers
 {
@@ -27,9 +28,9 @@ namespace MyToDo.Api.Controllers
         }
 
         [HttpGet]
-        public async Task<ApiResponse> GetAll()
+        public async Task<ApiResponse> GetAll([FromQuery] QueryParameter param)
         {
-            return await service.GetAllAsync();
+            return await service.GetAllAsync(param);
         }
 
         /// <summary>

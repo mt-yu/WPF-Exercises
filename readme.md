@@ -81,3 +81,5 @@
 
 8. autoMapper 自动映射 实体对象 和 数据库对象 的类库			
 	通过nuget 安装
+
+9. 查询会涉及到很多参数的情况，在share 中创建一个 Parameters
