@@ -1,4 +1,5 @@
-﻿using MyToDo.Client.Common.Models;
+﻿using MyToDo.Client.Services;
+using MyToDo.Share.DataTransfers;
 using Prism.Commands;
 using Prism.Mvvm;
 using System;
@@ -14,11 +15,13 @@ namespace MyToDo.Client.ViewModels
     {
         private ObservableCollection<MemoDto> memoDots;
         private bool isRightDrawerOpen;
+        private readonly IMemoService service;
 
-        public MemoViewModel()
+        public MemoViewModel(IMemoService service)
         {
             MemoDtos = new ObservableCollection<MemoDto>();
             AddCommand = new DelegateCommand(Add);
+            this.service = service;
             CreateTestData();
         }
 
@@ -44,11 +47,21 @@ namespace MyToDo.Client.ViewModels
             set { isRightDrawerOpen = value; RaisePropertyChanged(); }
         }
 
-        private void CreateTestData()
+        private async void CreateTestData()
         {
-            for (int i = 0; i < 10; i++)
+            //for (int i = 0; i < 10; i++)
+            //{
+            //    MemoDtos.Add(new MemoDto { Title = $"{i}-memo", Content = $"{i}-memo..." });
+            //}
+            var memoResult = await service.GetAllAsync(new Share.Parameters.QueryParameter() { PageIndex = 0, PageSize = 100 });
+
+            if (memoResult != null && memoResult.Status)
             {
-                MemoDtos.Add(new MemoDto { Title = $"{i}-memo", Content = $"{i}-memo..." });
+                MemoDtos.Clear();
+                foreach (var item in memoResult.Result.Items)
+                {
+                    MemoDtos.Add(item);
+                }
             }
         }
     }
