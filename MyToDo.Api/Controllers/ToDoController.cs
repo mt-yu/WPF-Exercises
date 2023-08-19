@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore.Query.Internal;
 using MyToDo.Api.Context;
 using MyToDo.Api.Services;
+using MyToDo.Share.DataTransfers;
 
 namespace MyToDo.Api.Controllers
 {
@@ -32,18 +33,20 @@ namespace MyToDo.Api.Controllers
         }
 
         /// <summary>
-        /// 一般传入参数  不会传入实体类 而是改成 Dto
+        /// 注: 控制器中传递的是 Dto 具体执行的时候 会通过AutoMapper(如果字段不同则需要到ProFile 中进行配置) 转换成数据库实体来进行操作
+        /// 一般传入参数  不会传入实体类，数据库当中实体往往有很多 的关系和命名 这里一般不可能和这些挂钩， 所以需要改成 Dto （数据传输层来处理，纯数据）
+        /// Dto 后缀： Dto 是 "Data Transfer Object" 的缩写，意为数据传输对象。这是一种用于在不同层（例如应用程序层和数据访问层）之间传输数据的对象。通常，Dto 对象是轻量级的，只包含必要的数据，而不包含业务逻辑。Dto 对象有助于在不同层之间减少耦合，提高性能，并确保只传输所需的数据。
         /// </summary>
         /// <param name="param"></param>
         /// <returns></returns>
         [HttpPost]
-        public async Task<ApiResponse> Add([FromBody] ToDo model)
+        public async Task<ApiResponse> Add([FromBody] ToDoDto model)
         {
             return await service.AddAsync(model);
         }
 
         [HttpPost]
-        public async Task<ApiResponse> Update([FromBody] ToDo model)
+        public async Task<ApiResponse> Update([FromBody] ToDoDto model)
         {
             return await service.UpdateAsync(model);
         }

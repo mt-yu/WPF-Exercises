@@ -78,3 +78,6 @@
 
 	7.2 创建 Services 的服务代码 来让 具体的仓储实现 与 控制器进行解耦 IBaseService (具备CRUD 的基本操作)
 		创建 通用的 请求返回类型 ApiResponse
+
+8. autoMapper 自动映射 实体对象 和 数据库对象 的类库			
+	通过nuget 安装
