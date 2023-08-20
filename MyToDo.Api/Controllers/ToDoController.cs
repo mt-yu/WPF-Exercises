@@ -57,6 +57,13 @@ namespace MyToDo.Api.Controllers
         {
             return await service.DeleteAsync(id);
         }
+
+        [HttpGet]
+        public async Task<ApiResponse> Summary()
+        {
+            return await service.Summary();
+        }
+
         #region old 以下写法没问题，但是是基于某种实现，没必要卸载控制器上，建议用服务的方法来提供给控制器， 通过服务来将 以下代码 和控制器解耦，
         //private readonly IUnitOfWork unitOfWork;
 

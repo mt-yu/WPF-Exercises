@@ -3,6 +3,7 @@ using MyToDo.Api.Context;
 using MyToDo.Share.DataTransfers;
 using MyToDo.Share.Parameters;
 using System.Linq.Expressions;
+using System.Collections.ObjectModel;
 
 namespace MyToDo.Api.Services
 {
@@ -166,6 +167,36 @@ namespace MyToDo.Api.Services
             {
 
                 return new ApiResponse(ex.Message, false);
+            }
+        }
+
+        public async Task<ApiResponse> Summary()
+        {
+            try
+            {
+                // 待办事项结果
+                var todos = await unitOfWork.GetRepository<ToDo>().GetAllAsync(
+                    orderBy: source => source.OrderByDescending(t => t.CreateDateTime));
+
+                // 备忘录结果
+                var memos = await unitOfWork.GetRepository<Memo>().GetAllAsync(
+                    orderBy: source => source.OrderByDescending(t => t.CreateDateTime));
+
+                SummaryDto summary = new SummaryDto();
+
+                summary.Sum = todos.Count();
+                summary.CompletedCount = todos.Where(t => t.Status == 1).Count();
+                summary.CompletedRatio = (summary.CompletedCount / (double)summary.Sum).ToString("0%");
+                summary.MemoCount = memos.Count();
+
+                summary.ToDos = new ObservableCollection<ToDoDto>(mapper.Map<List<ToDoDto>>(todos.Where(t => t.Status == 0)));
+                summary.Memos= new ObservableCollection<MemoDto>(mapper.Map<List<MemoDto>>(memos));
+
+                return new ApiResponse(true, summary);
+            }
+            catch (Exception)
+            {
+                return new ApiResponse("", false);
             }
         }
     }

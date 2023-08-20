@@ -9,5 +9,7 @@ namespace MyToDo.Client.Services
     public interface IToDoService : IBaseService<ToDoDto>
     {
         Task<ApiResponse<PagedList<ToDoDto>>> GetAllFilterAsync(ToDoParameter parameter);
+
+        Task<ApiResponse<SummaryDto>> SummaryAsync();
     }
 }
