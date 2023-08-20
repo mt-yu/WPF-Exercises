@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using MyToDo.Api.Context;
 using MyToDo.Share.DataTransfers;
+using MyToDo.Share.Extensions;
 
 namespace MyToDo.Api.Services
 {
@@ -19,7 +20,8 @@ namespace MyToDo.Api.Services
         {
             try
             {
-                var user = work.GetRepository<User>().GetFirstOrDefaultAsync(predicate: x => x.Account.Equals(Account) && x.PassWord.Equals(Password));
+                Password.GetMD5();
+                var user = await work.GetRepository<User>().GetFirstOrDefaultAsync(predicate: x => x.Account.Equals(Account) && x.PassWord.Equals(Password));
 
                 if (user == null) 
                 {
@@ -48,6 +50,7 @@ namespace MyToDo.Api.Services
                 }
 
                 dbUser.CreateDateTime = DateTime.Now;
+                dbUser.PassWord = dbUser.PassWord.GetMD5();
                 await repository.InsertAsync(dbUser);
 
                 if (await work.SaveChangesAsync() > 0)

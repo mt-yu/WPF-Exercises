@@ -7,21 +7,52 @@ namespace MyToDo.Client.ViewModels
 {
     public class LoginViewModel : BindableBase, IDialogAware
     {
+        private string account;
+        private string passWord;
+
+
         public LoginViewModel()
         {
-            CloseCommand = new DelegateCommand(Close);
+            ExecuteCommand = new DelegateCommand<string>(Execute);
         }
 
-        private void Close()
-        {
-            RequestClose?.Invoke(new DialogResult(ButtonResult.Cancel));
-        }
-
-        DelegateCommand CloseCommand { get; set; }
+        DelegateCommand<string> ExecuteCommand { get; set; }
 
         public string Title { get; set; } = "雾山五行";
 
+        public string Account
+        {
+            get { return account; }
+            set { account = value; RaisePropertyChanged(); }
+        }
+
+
+        public string PassWord
+        {
+            get { return passWord; }
+            set { passWord = value; RaisePropertyChanged(); }
+        }
+
         public event Action<IDialogResult> RequestClose;
+
+        private void Execute(string arg)
+        {
+            switch (arg)
+            {
+                case "Login": Login(); break;
+                case "LoginOut": LoginOut(); break;
+                default:
+                    break;
+            }
+        }
+
+        private void Login()
+        {
+        }
+
+        private void LoginOut()
+        {
+        }
 
         public bool CanCloseDialog()
         {

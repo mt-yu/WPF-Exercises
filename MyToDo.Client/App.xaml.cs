@@ -62,9 +62,9 @@ namespace MyToDo.Client
             containerRegistry.Register<IToDoService, ToDoService>();
             containerRegistry.Register<IMemoService, MemoService>();
 
+            containerRegistry.RegisterDialog<LoginView, LoginViewModel>();
             containerRegistry.RegisterForNavigation<AddToDoView, AddToDoViewModel>();
             containerRegistry.RegisterForNavigation<AddMemoView, AddMemoViewModel>();
-            containerRegistry.RegisterDialog<LoginView, LoginViewModel>();
 
             containerRegistry.Register<IDialogHostService, DialogHostService>();
 
