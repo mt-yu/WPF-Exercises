@@ -21,7 +21,7 @@
         </Style>
     </prism:Dialog.WindowStyle>
     <UserControl.Background>
-        <ImageBrush ImageSource="/Images/神火归来.png" Stretch="UniformToFill"/>
+        <ImageBrush Opacity=".9" ImageSource="/Images/神火归来.png" Stretch="UniformToFill"/>
     </UserControl.Background>
     <Grid>
         <md:ColorZone x:Name="cloroZone"  Mode="Custom" Background="Transparent" Padding="8" Panel.ZIndex="1">
@@ -31,36 +31,62 @@
             <DockPanel LastChildFill="False">
                 <Image Source="/Images/logo.ico" DockPanel.Dock="Left" Width="32" Height="32"/>
                 <TextBlock Margin="8,0,0,0" Text="{Binding Title}" Foreground="White" FontSize="16" VerticalAlignment="Center"/>
-                <Button DockPanel.Dock="Right" Style="{StaticResource MaterialDesignIconButton}" Width="32" Height="32" Command="{Binding ExecuteCommand}" CommandParameter="退出">
+                <Button DockPanel.Dock="Right" Style="{StaticResource MaterialDesignIconButton}" Width="32" Height="32" Command="{Binding ExecuteCommand}" CommandParameter="LoginOut">
                     <md:PackIcon Kind="WindowClose" /> 
                 </Button>
             </DockPanel>
         </md:ColorZone>
         <Grid>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="23*"/>
-                <RowDefinition Height="277*"/>
-            </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="1.5*"/>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
             <!--<Image Source="/Images/神火归来.png" Margin="24"/>-->
-            <DockPanel Grid.Column="1" VerticalAlignment="Top" Margin="16,27,16,0" Grid.Row="1">
-                <TextBlock Text="欢迎使用" FontSize="22" FontWeight="Bold" Foreground="White" Margin="0, 10" DockPanel.Dock="Top"/>
-                <TextBox Margin="0, 10" DockPanel.Dock="Top" md:HintAssist.Hint="请输入账号" Foreground="White" Text="{Binding Account}"/>
-                <PasswordBox Margin="0, 10" DockPanel.Dock="Top" md:HintAssist.Hint="请输入密码" Foreground="White" pass:PassWordExtensions.PassWord="{Binding PassWord}" >
-                    <i:Interaction.Behaviors>
-                        <pass:PasswordBehavior/>
-                    </i:Interaction.Behaviors>
-                </PasswordBox>
-                <Button Content="登录系统" Command="{Binding ExecuteCommand}" CommandParameter="Login" DockPanel.Dock="Top"/>
 
-                <DockPanel LastChildFill="False" Margin="0, 8">
-                    <TextBlock Text="注册账号" Foreground="White"/>
-                    <TextBlock Text="忘记密码" DockPanel.Dock="Right" Foreground="White"/>
-                </DockPanel>
-            </DockPanel>
+            <md:Transitioner Grid.Column="1" SelectedIndex="{Binding SelectedIndex}">
+                <md:TransitionerSlide>
+                    <DockPanel VerticalAlignment="Top" Margin="16,27,16,0" Grid.Row="1">
+                        <TextBlock Text="欢迎使用" FontSize="22" FontWeight="Bold" Foreground="White" Margin="0, 10" DockPanel.Dock="Top"/>
+                        <TextBox Margin="0, 10" DockPanel.Dock="Top" md:HintAssist.Hint="请输入账号" Foreground="White" Text="{Binding Account}"/>
+                        <PasswordBox Margin="0, 10" DockPanel.Dock="Top" md:HintAssist.Hint="请输入密码" Foreground="White" pass:PassWordExtensions.PassWord="{Binding PassWord, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" >
+                            <i:Interaction.Behaviors>
+                                <pass:PasswordBehavior/>
+                            </i:Interaction.Behaviors>
+                        </PasswordBox>
+                        <Button Content="登录系统" Command="{Binding ExecuteCommand}" CommandParameter="Login" DockPanel.Dock="Top"/>
+
+                        <DockPanel LastChildFill="False" Margin="0, 8">
+                            <TextBlock Text="注册账号" Foreground="White">
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="MouseLeftButtonDown">
+                                        <i:InvokeCommandAction Command="{Binding ExecuteCommand}" CommandParameter="GoRegister"/>
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
+                            </TextBlock>
+                            <TextBlock Text="忘记密码" DockPanel.Dock="Right" Foreground="White"/>
+                        </DockPanel>
+                    </DockPanel>
+                </md:TransitionerSlide>
+                <md:TransitionerSlide>
+                    <DockPanel VerticalAlignment="Center" Margin="15">
+                        <TextBlock Text="注册账号" FontSize="22" FontWeight="Bold" Foreground="White" DockPanel.Dock="Top"/>
+                        <TextBox Text="{Binding UserDto.Account}" md:HintAssist.Hint="请输入账号" Margin="0, 5" Foreground="White" DockPanel.Dock="Top"/>
+                        <TextBox Text="{Binding UserDto.UserName}" md:HintAssist.Hint="请输入用户名" Margin="0, 5" Foreground="White" DockPanel.Dock="Top"/>
+                        <PasswordBox Margin="0, 5" DockPanel.Dock="Top" md:HintAssist.Hint="请输入密码" Foreground="White" pass:PassWordExtensions.PassWord="{Binding UserDto.PassWord, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" >
+                            <i:Interaction.Behaviors>
+                                <pass:PasswordBehavior/>
+                            </i:Interaction.Behaviors>
+                        </PasswordBox>
+                        <PasswordBox Margin="0, 5" DockPanel.Dock="Top" md:HintAssist.Hint="请再次输入密码" Foreground="White" pass:PassWordExtensions.PassWord="{Binding UserDto.NewPassWord, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" >
+                            <i:Interaction.Behaviors>
+                                <pass:PasswordBehavior/>
+                            </i:Interaction.Behaviors>
+                        </PasswordBox>
+                        <Button Content="注册账号" Command="{Binding ExecuteCommand}" CommandParameter="Register" Margin="0,5" DockPanel.Dock="Top"/>
+                        <Button Content="返回账号" Command="{Binding ExecuteCommand}" CommandParameter="ReturnLogin" Margin="0,5" DockPanel.Dock="Top"/>
+                    </DockPanel>
+                </md:TransitionerSlide>
+            </md:Transitioner>
         </Grid>
     </Grid>
 </UserControl>

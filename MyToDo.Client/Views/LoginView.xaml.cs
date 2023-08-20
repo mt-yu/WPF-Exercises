@@ -26,13 +26,6 @@ namespace MyToDo.Client.Views
         public LoginView()
         {
             InitializeComponent();
-            //cloroZone.MouseMove += (s, e) =>
-            //{
-            //    if (e.LeftButton == MouseButtonState.Pressed)
-            //    {
-            //        this.DragMove();
-            //    }
-            //};
         }
     }
 }

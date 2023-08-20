@@ -48,7 +48,7 @@ namespace MyToDo.Client.Extension
 
             if (passwordBox != null && passwordBox.Password != password)
             {
-                PassWordExtensions.SetPassWord(passwordBox, password);
+                PassWordExtensions.SetPassWord(passwordBox, passwordBox.Password);
             }
         }
 
