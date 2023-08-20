@@ -6,6 +6,6 @@ namespace MyToDo.Api.Services
     {
         Task<ApiResponse> LoginAsync(string Account, string Password);
 
-        Task<ApiResponse> ResgiterAsync(UserDto user);
+        Task<ApiResponse> RegisterAsync(UserDto user);
     }
 }

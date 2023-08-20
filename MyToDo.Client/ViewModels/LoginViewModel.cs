@@ -1,4 +1,6 @@
-﻿using Prism.Commands;
+﻿using MyToDo.Client.Services;
+using MyToDo.Share.DataTransfers;
+using Prism.Commands;
 using Prism.Mvvm;
 using Prism.Services.Dialogs;
 using System;
@@ -9,11 +11,12 @@ namespace MyToDo.Client.ViewModels
     {
         private string account;
         private string passWord;
+        private readonly ILoginService loginService;
 
-
-        public LoginViewModel()
+        public LoginViewModel(ILoginService loginService)
         {
             ExecuteCommand = new DelegateCommand<string>(Execute);
+            this.loginService = loginService;
         }
 
         DelegateCommand<string> ExecuteCommand { get; set; }
@@ -46,12 +49,27 @@ namespace MyToDo.Client.ViewModels
             }
         }
 
-        private void Login()
+        private async void Login()
         {
+            if (string.IsNullOrWhiteSpace(Account) || string.IsNullOrWhiteSpace(PassWord))
+            {
+                return;
+            }
+
+            var result = await loginService.LoginAsync(new UserDto() { Account = Account, PassWord = PassWord});
+
+            if (result.Status)
+            {
+                RequestClose?.Invoke(new DialogResult(ButtonResult.OK));
+            }
+
+            // 登录失败提示。。
         }
 
         private void LoginOut()
         {
+            RequestClose?.Invoke(new DialogResult(ButtonResult.Cancel));
+
         }
 
         public bool CanCloseDialog()
@@ -61,6 +79,7 @@ namespace MyToDo.Client.ViewModels
 
         public void OnDialogClosed()
         {
+            LoginOut();
         }
 
         public void OnDialogOpened(IDialogParameters parameters)

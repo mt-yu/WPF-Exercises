@@ -26,9 +26,9 @@ namespace MyToDo.Api.Controllers
         }
 
         [HttpPost]
-        public async Task<ApiResponse> Resgiter(UserDto user)
+        public async Task<ApiResponse> Register(UserDto user)
         {
-            return await service.ResgiterAsync(user);
+            return await service.RegisterAsync(user);
         }
     }
 }

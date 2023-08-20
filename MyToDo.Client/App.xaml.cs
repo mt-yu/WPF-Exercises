@@ -70,6 +70,8 @@ namespace MyToDo.Client
 
             containerRegistry.RegisterForNavigation<MessageView, MessageViewModel>();
 
+            containerRegistry.Register<ILoginService, LoginService>();
+
         }
     }
 }

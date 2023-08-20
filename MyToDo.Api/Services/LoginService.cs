@@ -36,7 +36,7 @@ namespace MyToDo.Api.Services
             }
         }
 
-        public async Task<ApiResponse> ResgiterAsync(UserDto model)
+        public async Task<ApiResponse> RegisterAsync(UserDto model)
         {
             try
             {
