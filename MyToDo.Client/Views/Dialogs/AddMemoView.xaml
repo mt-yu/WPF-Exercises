@@ -19,8 +19,8 @@
             <TextBox Margin="20, 10" TextWrapping="Wrap" AcceptsReturn="True" MinHeight="100" md:HintAssist.Hint="请输入备忘录内容" DockPanel.Dock="Top"/>
         </DockPanel>
         <StackPanel Margin="8" Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right" >
-            <Button Content="确认" Margin="0,0,8,0"/>
-            <Button Content="取消" Style="{StaticResource MaterialDesignOutlinedButton}" />
+            <Button Content="确认" Command="{Binding SaveCommand}" Margin="0,0,8,0"/>
+            <Button Content="取消" Command="{Binding CancelCommand}" Style="{StaticResource MaterialDesignOutlinedButton}" />
         </StackPanel>
     </Grid>
 </UserControl>

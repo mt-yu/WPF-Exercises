@@ -1,24 +1,41 @@
-﻿using Prism.Services.Dialogs;
+﻿using MaterialDesignThemes.Wpf;
+using MyToDo.Client.Common;
+using Prism.Commands;
+using Prism.Services.Dialogs;
 using System;
 
 namespace MyToDo.Client.ViewModels.Dialogs
 {
-    public class AddToDoViewModel : IDialogAware
+    public class AddToDoViewModel : IDialogHostAware
     {
-        public string Title { get; set; }
-
-        public event Action<IDialogResult> RequestClose;
-
-        public bool CanCloseDialog()
+        public AddToDoViewModel()
         {
-            return true;
+            SaveCommand = new DelegateCommand(Save);
+            CancelCommand = new DelegateCommand(Cancel);
         }
 
-        public void OnDialogClosed()
+        public string DialogHostName { get; set; }
+        public DelegateCommand SaveCommand { get; set; }
+        public DelegateCommand CancelCommand { get; set; }
+
+        private void Cancel()
         {
+            if (DialogHost.IsDialogOpen(DialogHostName))
+            {
+                DialogHost.Close(DialogHostName);
+            }
         }
 
-        public void OnDialogOpened(IDialogParameters parameters)
+        private void Save()
+        {
+            if (DialogHost.IsDialogOpen(DialogHostName))
+            {
+                DialogParameters @params = new DialogParameters();
+                DialogHost.Close(DialogHostName, new DialogResult(ButtonResult.OK, @params));
+            }
+        }
+
+        public void OnDialogOpened(IDialogParameters dialogParameters)
         {
         }
     }

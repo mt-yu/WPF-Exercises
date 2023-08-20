@@ -1,4 +1,5 @@
 ﻿using MaterialDesignThemes.Wpf;
+using MyToDo.Client.Common;
 using MyToDo.Client.Common.Models;
 using MyToDo.Share.DataTransfers;
 using Prism.Commands;
@@ -13,9 +14,9 @@ namespace MyToDo.Client.ViewModels
         public ObservableCollection<TaskBar> taskBars;
         public ObservableCollection<ToDoDto> toDoDtos;
         public ObservableCollection<MemoDto> memoDtos;
-        private readonly IDialogService dialog;
+        private readonly IDialogHostService dialog;
 
-        public IndexViewModel(IDialogService dialog)
+        public IndexViewModel(IDialogHostService dialog)
         {
             CreateTaskBars();
             ToDoDtos = new ObservableCollection<ToDoDto>();
@@ -57,12 +58,12 @@ namespace MyToDo.Client.ViewModels
 
         private void AddToDo()
         {
-            dialog.ShowDialog("AddToDoView");
+            dialog.ShowDialog("AddToDoView", null);
         }
 
         private void AddMemo()
         {
-            dialog.ShowDialog("AddMemoView");
+            dialog.ShowDialog("AddMemoView", null);
         }
 
         void CreateTaskBars()
