@@ -1,6 +1,9 @@
-﻿using MyToDo.Client.Common.Models;
+﻿using MaterialDesignThemes.Wpf;
+using MyToDo.Client.Common.Models;
 using MyToDo.Share.DataTransfers;
+using Prism.Commands;
 using Prism.Mvvm;
+using Prism.Services.Dialogs;
 using System.Collections.ObjectModel;
 
 namespace MyToDo.Client.ViewModels
@@ -10,17 +13,23 @@ namespace MyToDo.Client.ViewModels
         public ObservableCollection<TaskBar> taskBars;
         public ObservableCollection<ToDoDto> toDoDtos;
         public ObservableCollection<MemoDto> memoDtos;
+        private readonly IDialogService dialog;
 
-        public IndexViewModel()
+        public IndexViewModel(IDialogService dialog)
         {
             CreateTaskBars();
-            CreateTestData();
+            ToDoDtos = new ObservableCollection<ToDoDto>();
+            MemoDtos = new ObservableCollection<MemoDto>();
+            ExecuteCommand = new DelegateCommand<string>(Execute);
+            this.dialog = dialog;
         }
+
+        public DelegateCommand<string> ExecuteCommand { get; private set; }
 
         public ObservableCollection<TaskBar> TaskBars
         {
             get { return taskBars; }
-            set { taskBars = value;  RaisePropertyChanged(); }
+            set { taskBars = value; RaisePropertyChanged(); }
         }
 
         public ObservableCollection<ToDoDto> ToDoDtos
@@ -29,19 +38,42 @@ namespace MyToDo.Client.ViewModels
             set { toDoDtos = value; RaisePropertyChanged(); }
         }
 
-        public ObservableCollection<MemoDto>  MemoDtos
+        public ObservableCollection<MemoDto> MemoDtos
         {
             get { return memoDtos; }
             set { memoDtos = value; RaisePropertyChanged(); }
         }
 
+        private void Execute(string obj)
+        {
+            switch (obj)
+            {
+                case "新增待办": AddToDo(); break;
+                case "新增备忘录": AddMemo(); break;
+                default:
+                    break;
+            }
+        }
+
+        private void AddToDo()
+        {
+            dialog.ShowDialog("AddToDoView");
+        }
+
+        private void AddMemo()
+        {
+            dialog.ShowDialog("AddMemoView");
+        }
+
         void CreateTaskBars()
         {
-            TaskBars = new ObservableCollection<TaskBar>();
-            TaskBars.Add(new TaskBar() { Icon = "ClockFast", Title = "汇总", Content = "9", Color = "#0097ff", Target = "" });
-            TaskBars.Add(new TaskBar() { Icon = "ClockCheckOutline", Title = "已完成", Content = "9", Color = "#0eb138", Target = "" });
-            TaskBars.Add(new TaskBar() { Icon = "ChartLineVariant", Title = "完成比例", Content = "100%", Color = "#00b4dd", Target = "" });
-            TaskBars.Add(new TaskBar() { Icon = "PlaylistStar", Title = "备忘录 ", Content = "19", Color = "#ff9f00", Target = "" });
+            TaskBars = new ObservableCollection<TaskBar>
+            {
+                new TaskBar() { Icon = "ClockFast", Title = "汇总", Content = "9", Color = "#0097ff", Target = "" },
+                new TaskBar() { Icon = "ClockCheckOutline", Title = "已完成", Content = "9", Color = "#0eb138", Target = "" },
+                new TaskBar() { Icon = "ChartLineVariant", Title = "完成比例", Content = "100%", Color = "#00b4dd", Target = "" },
+                new TaskBar() { Icon = "PlaylistStar", Title = "备忘录 ", Content = "19", Color = "#ff9f00", Target = "" }
+            };
         }
 
         void CreateTestData()
@@ -50,7 +82,7 @@ namespace MyToDo.Client.ViewModels
             MemoDtos = new ObservableCollection<MemoDto>();
             for (int i = 0; i < 10; i++)
             {
-                ToDoDtos.Add(new ToDoDto() { Title=@$"{i}-todo", Content= @$"{i}-todo..." });
+                ToDoDtos.Add(new ToDoDto() { Title = @$"{i}-todo", Content = @$"{i}-todo..." });
                 MemoDtos.Add(new MemoDto() { Title = @$"{i}-memo", Content = @$"{i}-memo..." });
             }
         }

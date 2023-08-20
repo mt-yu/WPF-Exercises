@@ -41,7 +41,7 @@
                 </Grid.RowDefinitions>
 
                 <StackPanel Margin="15,0,0,0" Orientation="Horizontal">
-                    <TextBox Text="{Binding Search, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="240" materialDesign:HintAssist.HelperText="搜索用" materialDesign:HintAssist.Hint="查找代办事项..." materialDesign:TextFieldAssist.HasClearButton="True"
+                    <TextBox Text="{Binding Search, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="240" materialDesign:HintAssist.HelperText="搜索用" materialDesign:HintAssist.Hint="查找代办事项..." materialDesign:TextFieldAssist.HasClearButton="True" Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                      VerticalAlignment="Center">
                         <TextBox.InputBindings>
                             <KeyBinding Key="Enter" Command="{Binding ExecuteCommand}" CommandParameter="查询"/>

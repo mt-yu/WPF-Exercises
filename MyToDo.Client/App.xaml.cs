@@ -2,7 +2,9 @@
 using MyToDo.Client.Common;
 using MyToDo.Client.Services;
 using MyToDo.Client.ViewModels;
+using MyToDo.Client.ViewModels.Dialogs;
 using MyToDo.Client.Views;
+using MyToDo.Client.Views.Dialogs;
 using Prism.DryIoc;
 using Prism.Ioc;
 using System.Windows;
@@ -47,6 +49,9 @@ namespace MyToDo.Client
 
             containerRegistry.Register<IToDoService, ToDoService>();
             containerRegistry.Register<IMemoService, MemoService>();
+
+            containerRegistry.RegisterDialog<AddToDoView, AddToDoViewModel>();
+            containerRegistry.RegisterDialog<AddMemoView, AddMemoViewModel>();
 
         }
     }

@@ -68,7 +68,7 @@
                 </DockPanel.Resources>
                 <DockPanel Margin="10, 5" DockPanel.Dock="Top" LastChildFill="False">
                     <TextBlock Text="代办事项" FontSize="20" FontWeight="Bold"/>
-                    <Button Style="{StaticResource MaterialDesignFloatingActionMiniSecondaryLightButton}" VerticalAlignment="Top" DockPanel.Dock="Right">
+                    <Button Command="{Binding ExecuteCommand}" CommandParameter="新增待办" Style="{StaticResource MaterialDesignFloatingActionMiniSecondaryLightButton}" VerticalAlignment="Top" DockPanel.Dock="Right">
                         <materialDesign:PackIcon Width="{StaticResource IconSize}" Height="{StaticResource IconSize}" Kind="Plus" />
                     </Button>
                 </DockPanel>
@@ -96,7 +96,7 @@
                 </DockPanel.Resources>
                 <DockPanel Margin="10, 5" DockPanel.Dock="Top" LastChildFill="False">
                     <TextBlock Text="备忘录" FontSize="20" FontWeight="Bold"/>
-                    <Button Style="{StaticResource MaterialDesignFloatingActionMiniSecondaryLightButton}" VerticalAlignment="Top" DockPanel.Dock="Right">
+                    <Button Command="{Binding ExecuteCommand}" CommandParameter="新增备忘录" Style="{StaticResource MaterialDesignFloatingActionMiniSecondaryLightButton}" VerticalAlignment="Top" DockPanel.Dock="Right">
                         <materialDesign:PackIcon Width="{StaticResource IconSize}" Height="{StaticResource IconSize}" Kind="Plus" />
                     </Button>
                 </DockPanel>
