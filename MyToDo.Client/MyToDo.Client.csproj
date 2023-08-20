@@ -5,12 +5,18 @@
     <TargetFramework>net6.0-windows</TargetFramework>
     <Nullable>enable</Nullable>
     <UseWPF>true</UseWPF>
+    <ApplicationIcon>Images\logo.ico</ApplicationIcon>
   </PropertyGroup>
 
   <ItemGroup>
     <None Remove="Images\user.jpg" />
     <None Remove="Images\公仪楚人.png" />
     <None Remove="Images\水冠.jpg" />
+    <None Remove="Images\神火归来.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Images\logo.ico" />
   </ItemGroup>
 
   <ItemGroup>
@@ -28,6 +34,7 @@
     <Resource Include="Images\user.jpg" />
     <Resource Include="Images\公仪楚人.png" />
     <Resource Include="Images\水冠.jpg" />
+    <Resource Include="Images\神火归来.png" />
   </ItemGroup>
 
 </Project>
