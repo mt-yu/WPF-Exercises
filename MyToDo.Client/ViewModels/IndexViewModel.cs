@@ -1,28 +1,37 @@
-﻿using MaterialDesignThemes.Wpf;
+﻿using MaterialDesignColors;
+using MaterialDesignThemes.Wpf;
 using MyToDo.Client.Common;
 using MyToDo.Client.Common.Models;
+using MyToDo.Client.Services;
 using MyToDo.Share.DataTransfers;
+using MyToDo.Share.Parameters;
 using Prism.Commands;
+using Prism.Ioc;
 using Prism.Mvvm;
+using Prism.Regions;
 using Prism.Services.Dialogs;
 using System.Collections.ObjectModel;
 
 namespace MyToDo.Client.ViewModels
 {
-    public class IndexViewModel : BindableBase
+    public class IndexViewModel : NavigationViewModel
     {
         public ObservableCollection<TaskBar> taskBars;
         public ObservableCollection<ToDoDto> toDoDtos;
         public ObservableCollection<MemoDto> memoDtos;
         private readonly IDialogHostService dialog;
+        private readonly IToDoService toDoService;
+        private readonly IMemoService memoService;
 
-        public IndexViewModel(IDialogHostService dialog)
+        public IndexViewModel(IContainerProvider provider, IDialogHostService dialog) : base(provider)
         {
             CreateTaskBars();
             ToDoDtos = new ObservableCollection<ToDoDto>();
             MemoDtos = new ObservableCollection<MemoDto>();
             ExecuteCommand = new DelegateCommand<string>(Execute);
             this.dialog = dialog;
+            this.toDoService = provider.Resolve<IToDoService>();
+            this.memoService = provider.Resolve<IMemoService>();
         }
 
         public DelegateCommand<string> ExecuteCommand { get; private set; }
@@ -56,14 +65,52 @@ namespace MyToDo.Client.ViewModels
             }
         }
 
-        private void AddToDo()
+        /// <summary>
+        /// 添加待办事项
+        /// </summary>
+        async void AddToDo()
         {
-            dialog.ShowDialog("AddToDoView", null);
+            var dialogResult = await dialog.ShowDialog("AddToDoView", null);
+            if (dialogResult.Result == ButtonResult.OK)
+            {
+                var todo = dialogResult.Parameters.GetValue<ToDoDto>("Value");
+                if (todo.Id > 0)
+                {
+
+                }
+                else
+                {
+                    var addResult = await toDoService.AddAsync(todo);
+                    if (addResult.Status)
+                    {
+                        ToDoDtos.Add(addResult.Result);
+                    }
+                }
+            }
         }
 
-        private void AddMemo()
+        /// <summary>
+        /// 添加备忘录
+        /// </summary>
+        async void AddMemo()
         {
-            dialog.ShowDialog("AddMemoView", null);
+            var dialogResult = await dialog.ShowDialog("AddMemoView", null);
+            if (dialogResult.Result == ButtonResult.OK)
+            {
+                var memo = dialogResult.Parameters.GetValue<MemoDto>("Value");
+                if (memo.Id > 0)
+                {
+
+                }
+                else
+                {
+                    var addResult = await memoService.AddAsync(memo);
+                    if (addResult.Status)
+                    {
+                        MemoDtos.Add(addResult.Result);
+                    }
+                }
+            }
         }
 
         void CreateTaskBars()
@@ -77,15 +124,41 @@ namespace MyToDo.Client.ViewModels
             };
         }
 
-        void CreateTestData()
+        public override void OnNavigatedTo(NavigationContext navigationContext)
         {
-            ToDoDtos = new ObservableCollection<ToDoDto>();
-            MemoDtos = new ObservableCollection<MemoDto>();
-            for (int i = 0; i < 10; i++)
+            base.OnNavigatedTo(navigationContext);
+            GetDataAsync();
+        }
+
+        async void GetDataAsync()
+        {
+            try
             {
-                ToDoDtos.Add(new ToDoDto() { Title = @$"{i}-todo", Content = @$"{i}-todo..." });
-                MemoDtos.Add(new MemoDto() { Title = @$"{i}-memo", Content = @$"{i}-memo..." });
+                UpdateLoading(true);
+
+                //int? status = SelectedIndex == 0 ? null : SelectedIndex == 2 ? 1 : 0;
+
+                var todoResult = await toDoService.GetAllFilterAsync(new ToDoParameter()
+                {
+                    PageIndex = 0,
+                    PageSize = 100,
+                    //Status = status
+                });
+
+                if (todoResult != null && todoResult.Status)
+                {
+                    ToDoDtos.Clear();
+                    foreach (var item in todoResult.Result.Items)
+                    {
+                        ToDoDtos.Add(item);
+                    }
+                }
+            }
+            finally
+            {
+                UpdateLoading(false);
             }
         }
+
     }
 }
