@@ -43,6 +43,8 @@
             </Grid.ColumnDefinitions>
             <!--<Image Source="/Images/神火归来.png" Margin="24"/>-->
 
+            <md:Snackbar x:Name="loginSnackBar" Panel.ZIndex="1" MessageQueue="{md:MessageQueue}" Grid.ColumnSpan="2" VerticalAlignment="Bottom"/>
+
             <md:Transitioner Grid.Column="1" SelectedIndex="{Binding SelectedIndex}">
                 <md:TransitionerSlide>
                     <DockPanel VerticalAlignment="Top" Margin="16,27,16,0" Grid.Row="1">

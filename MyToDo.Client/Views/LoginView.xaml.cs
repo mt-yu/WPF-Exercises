@@ -1,5 +1,7 @@
 ﻿using MaterialDesignThemes.Wpf;
 using MyToDo.Client.Common;
+using MyToDo.Client.Extension;
+using Prism.Events;
 using Prism.Services.Dialogs;
 using System;
 using System.Collections.Generic;
@@ -23,9 +25,15 @@ namespace MyToDo.Client.Views
     /// </summary>
     public partial class LoginView : UserControl
     {
-        public LoginView()
+        public LoginView(IEventAggregator aggregator)
         {
             InitializeComponent();
+
+            // 注册消息提示
+            aggregator.RegisterMessage(arg =>
+            {
+                loginSnackBar.MessageQueue.Enqueue(arg.Message);
+            }, "Login");
         }
     }
 }

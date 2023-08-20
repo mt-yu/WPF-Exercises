@@ -36,8 +36,8 @@ namespace MyToDo.Share.DataTransfers
 
         public string NewPassWord
         {
-            get { return passWord; }
-            set { passWord = value; OnPropertyChanged(); }
+            get { return newPassWord; }
+            set { newPassWord = value; OnPropertyChanged(); }
         }
     }
 }

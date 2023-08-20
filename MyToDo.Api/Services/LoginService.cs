@@ -25,7 +25,7 @@ namespace MyToDo.Api.Services
 
                 if (user == null) 
                 {
-                    return new ApiResponse("账号或密码错误，请重试!");
+                    return new ApiResponse("账号或密码错误，请重试!", false);
                 }
                 return new ApiResponse(true, user);
             }
@@ -58,7 +58,7 @@ namespace MyToDo.Api.Services
                     return new ApiResponse(true, dbUser);
                 }
 
-                return new ApiResponse("注册失败，请稍后重试");
+                return new ApiResponse("注册失败，请稍后重试", false);
             }
             catch (Exception)
             {

@@ -57,9 +57,13 @@ namespace MyToDo.Client.Extension
         /// </summary>
         /// <param name="aggregator"></param>
         /// <param name="action"></param>
-        public static void RegisterMessage(this IEventAggregator aggregator, Action<string> action)
+        /// <param name="filter">过滤器</param>
+        public static void RegisterMessage(this IEventAggregator aggregator, Action<MessageModel> action, string filter = "Main")
         {
-            aggregator.GetEvent<MessageEvent>().Subscribe(action);
+            aggregator.GetEvent<MessageEvent>().Subscribe(action, ThreadOption.PublisherThread, true, (m) => 
+            {
+                return m.Filter.Equals(filter);
+            });
         }
 
         /// <summary>
@@ -67,9 +71,13 @@ namespace MyToDo.Client.Extension
         /// </summary>
         /// <param name="aggregator"></param>
         /// <param name="message"></param>
-        public static void SendMessage(this IEventAggregator aggregator, string message)
+        public static void SendMessage(this IEventAggregator aggregator, string message, string filter = "Main")
         {
-            aggregator.GetEvent<MessageEvent>().Publish(message);
+            aggregator.GetEvent<MessageEvent>().Publish(new MessageModel() 
+            {
+                Message = message,
+                Filter = filter
+            });
         }
     }
 }

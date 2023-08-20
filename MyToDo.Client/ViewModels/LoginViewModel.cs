@@ -1,6 +1,8 @@
-﻿using MyToDo.Client.Services;
+﻿using MyToDo.Client.Extension;
+using MyToDo.Client.Services;
 using MyToDo.Share.DataTransfers;
 using Prism.Commands;
+using Prism.Events;
 using Prism.Mvvm;
 using Prism.Services.Dialogs;
 using System;
@@ -14,11 +16,13 @@ namespace MyToDo.Client.ViewModels
         private int selectedIndex;
         private RegisterUserDto userDto;
         private readonly ILoginService loginService;
+        private readonly IEventAggregator aggregator;
 
-        public LoginViewModel(ILoginService loginService)
+        public LoginViewModel(ILoginService loginService, IEventAggregator aggregator)
         {
             ExecuteCommand = new DelegateCommand<string>(Execute);
             this.loginService = loginService;
+            this.aggregator = aggregator;
             UserDto = new RegisterUserDto();
         }
 
@@ -84,9 +88,11 @@ namespace MyToDo.Client.ViewModels
             if (result.Status)
             {
                 RequestClose?.Invoke(new DialogResult(ButtonResult.OK));
+                return;
             }
 
             // 登录失败提示。。
+            aggregator.SendMessage(result.Message, "Login");
         }
 
         private void LoginOut()
@@ -110,6 +116,7 @@ namespace MyToDo.Client.ViewModels
             if (UserDto.PassWord != UserDto.NewPassWord)
             {
                 // 验证失败提示...
+                aggregator.SendMessage("两次的密码不一致，请检查", "Login");
                 return;
             }
 
@@ -122,10 +129,13 @@ namespace MyToDo.Client.ViewModels
             if (result != null && result.Status)
             {
                 // 注册成功
+                aggregator.SendMessage("注册成功", "Login");
                 SelectedIndex = 0;
+                return;
             }
 
             // 注册失败提示...
+            aggregator.SendMessage(result.Message, "Login");
         }
 
         private void ReturnLogin()

@@ -34,7 +34,7 @@ namespace MyToDo.Client.Views
             // 注册提示消息
             aggregator.RegisterMessage(arg =>
             {
-                snackbar.MessageQueue.Enqueue(arg);
+                snackbar.MessageQueue.Enqueue(arg.Message);
             });
 
             // 注册等待消息窗口
