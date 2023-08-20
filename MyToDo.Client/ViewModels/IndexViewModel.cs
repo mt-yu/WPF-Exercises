@@ -96,32 +96,41 @@ namespace MyToDo.Client.ViewModels
             var dialogResult = await dialog.ShowDialog("AddToDoView", param);
             if (dialogResult.Result == ButtonResult.OK)
             {
-                var todo = dialogResult.Parameters.GetValue<ToDoDto>("Value");
-                if (todo.Id > 0)
+                try
                 {
-                    var updateResult = await toDoService.UpdateAsync(todo);
-                    if (updateResult.Status)
+                    UpdateLoading(true);
+                    var todo = dialogResult.Parameters.GetValue<ToDoDto>("Value");
+                    if (todo.Id > 0)
                     {
-                        var todoModel = Summary.ToDos.FirstOrDefault(t => t.Id.Equals(todo.Id));
-                        if (todoModel != null)
+                        var updateResult = await toDoService.UpdateAsync(todo);
+                        if (updateResult.Status)
                         {
-                            todoModel.Title = todo.Title;
-                            todoModel.Content = todo.Content;
-                            todoModel.Status = todo.Status;
+                            var todoModel = Summary.ToDos.FirstOrDefault(t => t.Id.Equals(todo.Id));
+                            if (todoModel != null)
+                            {
+                                todoModel.Title = todo.Title;
+                                todoModel.Content = todo.Content;
+                                todoModel.Status = todo.Status;
+                            }
+                        }
+                    }
+                    else
+                    {
+                        var addResult = await toDoService.AddAsync(todo);
+                        if (addResult.Status)
+                        {
+                            Summary.Sum += 1;
+                            Summary.ToDos.Add(addResult.Result);
+                            UpdateCompletedRatio();
+                            Refresh();
                         }
                     }
                 }
-                else
+                finally
                 {
-                    var addResult = await toDoService.AddAsync(todo);
-                    if (addResult.Status)
-                    {
-                        Summary.Sum += 1;
-                        Summary.ToDos.Add(addResult.Result);
-                        UpdateCompletedRatio();
-                        Refresh();
-                    }
+                    UpdateLoading(false);
                 }
+
             }
         }
 
@@ -139,45 +148,62 @@ namespace MyToDo.Client.ViewModels
             var dialogResult = await dialog.ShowDialog("AddMemoView", param);
             if (dialogResult.Result == ButtonResult.OK)
             {
-                var memo = dialogResult.Parameters.GetValue<MemoDto>("Value");
-                if (memo.Id > 0)
+                try
                 {
-                    var updateResult = await memoService.UpdateAsync(memo);
-                    if (updateResult.Status)
+                    UpdateLoading(true);
+                    var memo = dialogResult.Parameters.GetValue<MemoDto>("Value");
+                    if (memo.Id > 0)
                     {
-                        var memoModel = Summary.Memos.FirstOrDefault(t => t.Id.Equals(memo.Id));
-                        if (memoModel != null)
+                        var updateResult = await memoService.UpdateAsync(memo);
+                        if (updateResult.Status)
                         {
-                            memoModel.Title = memo.Title;
-                            memoModel.Content = memo.Content;
+                            var memoModel = Summary.Memos.FirstOrDefault(t => t.Id.Equals(memo.Id));
+                            if (memoModel != null)
+                            {
+                                memoModel.Title = memo.Title;
+                                memoModel.Content = memo.Content;
+                            }
+                        }
+                    }
+                    else
+                    {
+                        var addResult = await memoService.AddAsync(memo);
+                        if (addResult.Status)
+                        {
+                            Summary.Memos.Add(addResult.Result);
                         }
                     }
                 }
-                else
+                finally
                 {
-                    var addResult = await memoService.AddAsync(memo);
-                    if (addResult.Status)
-                    {
-                        Summary.Memos.Add(addResult.Result);
-                    }
+                    UpdateLoading(false);
                 }
             }
         }
 
         async void Completed(ToDoDto obj)
         {
-            obj.Status = 1;
-            var update = await toDoService.UpdateAsync(obj);
-            if (update.Status)
+            try
             {
-                var todo = Summary.ToDos.FirstOrDefault(t => t.Id.Equals(obj.Id));
-                if (todo != null)
+                UpdateLoading(true);
+                obj.Status = 1;
+                var update = await toDoService.UpdateAsync(obj);
+                if (update.Status)
                 {
-                    Summary.ToDos.Remove(todo);
-                    Summary.CompletedCount += 1;
-                    UpdateCompletedRatio();
-                    Refresh();
+                    var todo = Summary.ToDos.FirstOrDefault(t => t.Id.Equals(obj.Id));
+                    if (todo != null)
+                    {
+                        Summary.ToDos.Remove(todo);
+                        Summary.CompletedCount += 1;
+                        UpdateCompletedRatio();
+                        Refresh();
+                    }
+                    aggregator.SendMessage("已完成!");
                 }
+            }
+            finally
+            {
+                UpdateLoading(false);
             }
         }
 
@@ -213,14 +239,21 @@ namespace MyToDo.Client.ViewModels
 
         public override async void OnNavigatedTo(NavigationContext navigationContext)
         {
-            var summary = await toDoService.SummaryAsync();
-            if (summary.Status)
-            {
-                Summary = summary.Result;
-                Refresh();
-            }
             base.OnNavigatedTo(navigationContext);
-            //GetDataAsync();
+            try
+            {
+                UpdateLoading(true);
+                var summary = await toDoService.SummaryAsync();
+                if (summary.Status)
+                {
+                    Summary = summary.Result;
+                    Refresh();
+                }
+            }
+            finally
+            {
+                UpdateLoading(false);
+            }
         }
 
         void Refresh()

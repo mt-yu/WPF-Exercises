@@ -31,6 +31,12 @@ namespace MyToDo.Client.Views
         {
             InitializeComponent();
 
+            // 注册提示消息
+            aggregator.RegisterMessage(arg =>
+            {
+                snackbar.MessageQueue.Enqueue(arg);
+            });
+
             // 注册等待消息窗口
             aggregator.Register(arg =>
             {
