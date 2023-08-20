@@ -88,10 +88,10 @@
                                                 <Style TargetType="Border">
                                                     <Style.Triggers>
                                                         <DataTrigger Binding="{Binding Status}" Value="0">
-                                                            <Setter Property="Background" Value="#4aa079"/>
+                                                            <Setter Property="Background" Value="#788cde"/>
                                                         </DataTrigger>
                                                         <DataTrigger Binding="{Binding Status}" Value="1">
-                                                            <Setter Property="Background" Value="#788cde"/>
+                                                            <Setter Property="Background" Value="#4aa079"/>
                                                         </DataTrigger>
                                                     </Style.Triggers>
                                                 </Style>

@@ -2,6 +2,7 @@
 using MaterialDesignThemes.Wpf;
 using MyToDo.Client.Common;
 using MyToDo.Client.Common.Models;
+using MyToDo.Client.Extension;
 using MyToDo.Client.Services;
 using MyToDo.Share.DataTransfers;
 using MyToDo.Share.Parameters;
@@ -22,23 +23,28 @@ namespace MyToDo.Client.ViewModels
         private readonly IDialogHostService dialog;
         private readonly IToDoService toDoService;
         private readonly IMemoService memoService;
+        private readonly IRegionManager regionManager;
 
         public IndexViewModel(IContainerProvider provider, IDialogHostService dialog) : base(provider)
         {
+            Title = $"你好，Immt {DateTime.Now.GetDateTimeFormats('D')[1]}";
             CreateTaskBars();
             ExecuteCommand = new DelegateCommand<string>(Execute);
             this.dialog = dialog;
             this.toDoService = provider.Resolve<IToDoService>();
             this.memoService = provider.Resolve<IMemoService>();
+            this.regionManager = provider.Resolve<IRegionManager>();
             EditToDoCommand = new DelegateCommand<ToDoDto>(AddToDo);
             EditMemoCommand = new DelegateCommand<MemoDto>(AddMemo);
             ToDoCompletedCommand = new DelegateCommand<ToDoDto>(Completed);
+            NavigateCommand = new DelegateCommand<TaskBar>(Navigate);
         }
 
         public DelegateCommand<string> ExecuteCommand { get; private set; }
         public DelegateCommand<ToDoDto> EditToDoCommand { get; private set; }
         public DelegateCommand<MemoDto> EditMemoCommand { get; private set; }
         public DelegateCommand<ToDoDto> ToDoCompletedCommand { get; private set; }
+        public DelegateCommand<TaskBar> NavigateCommand { get; private set; }
 
         public ObservableCollection<TaskBar> TaskBars
         {
@@ -55,6 +61,14 @@ namespace MyToDo.Client.ViewModels
         {
             get { return summary; }
             set { summary = value; RaisePropertyChanged(); }
+        }
+
+        private string title;
+
+        public string Title
+        {
+            get { return title; }
+            set { title = value; RaisePropertyChanged(); }
         }
 
         private void Execute(string obj)
@@ -102,7 +116,10 @@ namespace MyToDo.Client.ViewModels
                     var addResult = await toDoService.AddAsync(todo);
                     if (addResult.Status)
                     {
+                        Summary.Sum += 1;
                         Summary.ToDos.Add(addResult.Result);
+                        UpdateCompletedRatio();
+                        Refresh();
                     }
                 }
             }
@@ -149,6 +166,7 @@ namespace MyToDo.Client.ViewModels
 
         async void Completed(ToDoDto obj)
         {
+            obj.Status = 1;
             var update = await toDoService.UpdateAsync(obj);
             if (update.Status)
             {
@@ -156,7 +174,29 @@ namespace MyToDo.Client.ViewModels
                 if (todo != null)
                 {
                     Summary.ToDos.Remove(todo);
+                    Summary.CompletedCount += 1;
+                    UpdateCompletedRatio();
+                    Refresh();
                 }
+            }
+        }
+
+        private void UpdateCompletedRatio()
+        {
+            Summary.CompletedRatio = (Summary.CompletedCount / (double)Summary.Sum).ToString("0%");
+        }
+
+        private void Navigate(TaskBar bar)
+        {
+            if (!string.IsNullOrWhiteSpace(bar.Target))
+            {
+                NavigationParameters parm = new NavigationParameters();
+                if (bar.Title == "已完成")
+                {
+                    parm.Add("Value", 2);
+                }
+
+                regionManager.Regions[PrismManager.MainViewRegionName].RequestNavigate(bar.Target, parm);
             }
         }
 
@@ -164,10 +204,10 @@ namespace MyToDo.Client.ViewModels
         {
             TaskBars = new ObservableCollection<TaskBar>
             {
-                new TaskBar() { Icon = "ClockFast", Title = "汇总", Color = "#0097ff", Target = "" },
-                new TaskBar() { Icon = "ClockCheckOutline", Title = "已完成", Color = "#0eb138", Target = "" },
+                new TaskBar() { Icon = "ClockFast", Title = "汇总", Color = "#0097ff", Target = "ToDoView" },
+                new TaskBar() { Icon = "ClockCheckOutline", Title = "已完成", Color = "#0eb138", Target = "ToDoView" },
                 new TaskBar() { Icon = "ChartLineVariant", Title = "完成比例", Color = "#00b4dd", Target = "" },
-                new TaskBar() { Icon = "PlaylistStar", Title = "备忘录 ", Color = "#ff9f00", Target = "" }
+                new TaskBar() { Icon = "PlaylistStar", Title = "备忘录 ", Color = "#ff9f00", Target = "MemoView" }
             };
         }
 
