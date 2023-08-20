@@ -54,6 +54,8 @@ namespace MyToDo.Client
             containerRegistry.RegisterForNavigation<AddMemoView, AddMemoViewModel>();
 
             containerRegistry.Register<IDialogHostService, DialogHostService>();
+
+            containerRegistry.RegisterForNavigation<MessageView, MessageViewModel>();
         }
     }
 }

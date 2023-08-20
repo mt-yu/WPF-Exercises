@@ -1,6 +1,8 @@
 ﻿using MaterialDesignThemes.Wpf;
+using MyToDo.Client.Common;
 using MyToDo.Client.Extension;
 using Prism.Events;
+using Prism.Services.Dialogs;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,7 +25,9 @@ namespace MyToDo.Client.Views
     /// </summary>
     public partial class MainView : Window
     {
-        public MainView(IEventAggregator aggregator)
+        private readonly IDialogHostService dialogHostService;
+
+        public MainView(IEventAggregator aggregator, IDialogHostService dialogHostService)
         {
             InitializeComponent();
 
@@ -53,7 +57,14 @@ namespace MyToDo.Client.Views
                     ((PackIcon)(btn).Content).Kind = PackIconKind.WindowRestore;
                 }
             };
-            btnClose.Click += (s, e) => { this.Close(); };
+            btnClose.Click += async (s, e) =>
+            {
+                var dialogResult = await dialogHostService.Question("温馨提示", "确认退出系统?");
+                if (dialogResult.Result == ButtonResult.OK)
+                {
+                    this.Close();
+                }
+            };
             cloroZone.MouseMove += (s, e) =>
             {
                 if (e.LeftButton == MouseButtonState.Pressed)
@@ -75,6 +86,8 @@ namespace MyToDo.Client.Views
                     ((PackIcon)(btn).Content).Kind = PackIconKind.WindowMaximize;
                 }
             };
+            this.dialogHostService = dialogHostService;
+            this.dialogHostService = dialogHostService;
         }
 
         private void menuBar_PreviewMouseLeftButtonUp(object sender, MouseButtonEventArgs e)

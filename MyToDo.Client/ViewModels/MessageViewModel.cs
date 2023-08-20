@@ -1,14 +1,14 @@
 ﻿using MaterialDesignThemes.Wpf;
 using MyToDo.Client.Common;
 using Prism.Commands;
+using Prism.Mvvm;
 using Prism.Services.Dialogs;
-using System;
 
-namespace MyToDo.Client.ViewModels.Dialogs
+namespace MyToDo.Client.ViewModels
 {
-    public class AddToDoViewModel : IDialogHostAware
+    public class MessageViewModel : BindableBase, IDialogHostAware
     {
-        public AddToDoViewModel()
+        public MessageViewModel()
         {
             SaveCommand = new DelegateCommand(Save);
             CancelCommand = new DelegateCommand(Cancel);
@@ -17,6 +17,23 @@ namespace MyToDo.Client.ViewModels.Dialogs
         public string DialogHostName { get; set; }
         public DelegateCommand SaveCommand { get; set; }
         public DelegateCommand CancelCommand { get; set; }
+
+        private string title;
+
+        public string Title
+        {
+            get { return title; }
+            set { title = value; RaisePropertyChanged(); }
+        }
+
+        private string content;
+
+        public string Content
+        {
+            get { return content; }
+            set { content = value; RaisePropertyChanged(); }
+        }
+
 
         private void Cancel()
         {
@@ -35,8 +52,13 @@ namespace MyToDo.Client.ViewModels.Dialogs
             }
         }
 
-        public void OnDialogOpened(IDialogParameters dialogParameters)
+
+        public void OnDialogOpened(IDialogParameters parameters)
         {
+            if(parameters.ContainsKey("Title"))
+                Title = parameters.GetValue<string>("Title");
+            if (parameters.ContainsKey("Content"))
+                Content = parameters.GetValue<string>("Content");
         }
     }
 }

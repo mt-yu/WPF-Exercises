@@ -1,10 +1,14 @@
-﻿using MyToDo.Client.Services;
+﻿using MaterialDesignThemes.Wpf;
+using MyToDo.Client.Common;
+using MyToDo.Client.Extension;
+using MyToDo.Client.Services;
 using MyToDo.Share.DataTransfers;
 using MyToDo.Share.Parameters;
 using Prism.Commands;
 using Prism.Ioc;
 using Prism.Mvvm;
 using Prism.Regions;
+using Prism.Services.Dialogs;
 using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -16,6 +20,7 @@ namespace MyToDo.Client.ViewModels
     public class ToDoViewModel : NavigationViewModel
     {
         private readonly IToDoService service;
+        private readonly IDialogHostService dialogHost;
         private ObservableCollection<ToDoDto> toDoDtos;
         private bool isRightDrawerOpen;
         private ToDoDto currentDto;
@@ -31,6 +36,7 @@ namespace MyToDo.Client.ViewModels
             ExecuteCommand = new DelegateCommand<string>(Execute);
             SelectedCommand = new DelegateCommand<ToDoDto>(Selected);
             DeleteCommand = new DelegateCommand<ToDoDto>(Delete);
+            this.dialogHost = containerProvider.Resolve<IDialogHostService>();
         }
 
         public DelegateCommand<string> ExecuteCommand { get; private set; }
@@ -176,14 +182,18 @@ namespace MyToDo.Client.ViewModels
         {
             try
             {
-                UpdateLoading(true);
-                var deleteResult = await service.DeleteAsync(obj.Id);
-                if (deleteResult.Status)
+                var dialogResult = await dialogHost.Question("温馨提示", $"确认删除待办事项:{obj.Title} ?");
+                if (dialogResult.Result == ButtonResult.OK)
                 {
-                    var model = ToDoDtos.FirstOrDefault(t => t.Id.Equals(obj.Id));
-                    if (model != null)
+                    UpdateLoading(true);
+                    var deleteResult = await service.DeleteAsync(obj.Id);
+                    if (deleteResult.Status)
                     {
-                        ToDoDtos.Remove(model);
+                        var model = ToDoDtos.FirstOrDefault(t => t.Id.Equals(obj.Id));
+                        if (model != null)
+                        {
+                            ToDoDtos.Remove(model);
+                        }
                     }
                 }
             }

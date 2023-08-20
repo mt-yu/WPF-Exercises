@@ -1,9 +1,14 @@
-﻿using MyToDo.Client.Services;
+﻿using DryIoc;
+using MaterialDesignThemes.Wpf;
+using MyToDo.Client.Common;
+using MyToDo.Client.Extension;
+using MyToDo.Client.Services;
 using MyToDo.Share.DataTransfers;
 using MyToDo.Share.Parameters;
 using Prism.Commands;
 using Prism.Ioc;
 using Prism.Regions;
+using Prism.Services.Dialogs;
 using System;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -13,6 +18,7 @@ namespace MyToDo.Client.ViewModels
     public class MemoViewModel : NavigationViewModel
     {
         private readonly IMemoService service;
+        private readonly IDialogHostService dialogHost;
         private ObservableCollection<MemoDto> toDoDtos;
         private bool isRightDrawerOpen;
         private MemoDto currentDto;
@@ -25,6 +31,7 @@ namespace MyToDo.Client.ViewModels
             ExecuteCommand = new DelegateCommand<string>(Execute);
             SelectedCommand = new DelegateCommand<MemoDto>(Selected);
             DeleteCommand = new DelegateCommand<MemoDto>(Delete);
+            dialogHost = containerProvider.Resolve<IDialogHostService>();
         }
 
         public DelegateCommand<string> ExecuteCommand { get; private set; }
@@ -158,14 +165,18 @@ namespace MyToDo.Client.ViewModels
         {
             try
             {
-                UpdateLoading(true);
-                var deleteResult = await service.DeleteAsync(obj.Id);
-                if (deleteResult.Status)
+                var dialogResult = await dialogHost.Question("温馨提示", $"确认删除待办事项:{obj.Title} ?");
+                if (dialogResult.Result == ButtonResult.OK)
                 {
-                    var model = MemoDtos.FirstOrDefault(t => t.Id.Equals(obj.Id));
-                    if (model != null)
+                    UpdateLoading(true);
+                    var deleteResult = await service.DeleteAsync(obj.Id);
+                    if (deleteResult.Status)
                     {
-                        MemoDtos.Remove(model);
+                        var model = MemoDtos.FirstOrDefault(t => t.Id.Equals(obj.Id));
+                        if (model != null)
+                        {
+                            MemoDtos.Remove(model);
+                        }
                     }
                 }
             }
