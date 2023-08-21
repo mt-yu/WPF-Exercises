@@ -1,4 +1,5 @@
-﻿using MyToDo.Client.Extension;
+﻿using MyToDo.Client.Common;
+using MyToDo.Client.Extension;
 using MyToDo.Client.Services;
 using MyToDo.Share.DataTransfers;
 using Prism.Commands;
@@ -83,16 +84,17 @@ namespace MyToDo.Client.ViewModels
                 return;
             }
 
-            var result = await loginService.LoginAsync(new UserDto() { Account = Account, PassWord = PassWord });
+            var login = await loginService.LoginAsync(new UserDto() { Account = Account, PassWord = PassWord });
 
-            if (result.Status)
+            if (login.Status)
             {
+                AppSession.UserName = login.Result.UserName;
                 RequestClose?.Invoke(new DialogResult(ButtonResult.OK));
                 return;
             }
 
             // 登录失败提示。。
-            aggregator.SendMessage(result.Message, "Login");
+            aggregator.SendMessage(login.Message, "Login");
         }
 
         private void LoginOut()

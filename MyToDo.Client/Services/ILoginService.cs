@@ -9,7 +9,7 @@ namespace MyToDo.Client.Services
 {
     public interface ILoginService
     {
-        Task<ApiResponse> LoginAsync(UserDto user);
+        Task<ApiResponse<UserDto>> LoginAsync(UserDto user);
         Task<ApiResponse> RegisterAsync(UserDto user);
     }
 }

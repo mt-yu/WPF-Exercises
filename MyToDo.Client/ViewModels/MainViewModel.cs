@@ -2,6 +2,7 @@
 using MyToDo.Client.Common.Models;
 using MyToDo.Client.Extension;
 using Prism.Commands;
+using Prism.Ioc;
 using Prism.Mvvm;
 using Prism.Regions;
 using System;
@@ -18,10 +19,13 @@ namespace MyToDo.Client.ViewModels
     {
         private ObservableCollection<MenuBar> menuBars;
         private readonly IRegionManager regionManager;
+        private readonly IContainerProvider containerProvider;
         private IRegionNavigationJournal journal;
 
-        public MainViewModel(IRegionManager regionManager)
+        public MainViewModel(IRegionManager regionManager, IContainerProvider containerProvider)
         {
+            this.regionManager = regionManager;
+            this.containerProvider = containerProvider;
             MenuBars = new ObservableCollection<MenuBar>();
             NavigateCommand = new DelegateCommand<MenuBar>(Navigate);
             GoBackCommand = new DelegateCommand(() =>
@@ -35,7 +39,7 @@ namespace MyToDo.Client.ViewModels
                 if (journal != null && journal.CanGoForward)
                     journal.GoForward();
             });
-            this.regionManager = regionManager;
+            LoginOutCommand = new DelegateCommand(LoginOut);
         }
 
         private void Navigate(MenuBar bar)
@@ -49,15 +53,29 @@ namespace MyToDo.Client.ViewModels
             });
         }
 
+        private void LoginOut()
+        {
+            App.LoginOut(containerProvider);
+        }
+
         public DelegateCommand<MenuBar> NavigateCommand { get; private set; }
         public DelegateCommand GoBackCommand { get; private set; }
         public DelegateCommand GoForwardCommand { get; private set; }
-
+        public DelegateCommand LoginOutCommand { get; private set; }
         public ObservableCollection<MenuBar> MenuBars
         {
             get { return menuBars; }
             set { menuBars = value; RaisePropertyChanged(); }
         }
+
+        private string userName;
+
+        public string UserName
+        {
+            get { return userName; }
+            set { userName = value; RaisePropertyChanged(); }
+        }
+
 
         void CreateMenuBar()
         {
@@ -72,6 +90,7 @@ namespace MyToDo.Client.ViewModels
         /// </summary>
         public void Configure()
         {
+            UserName = AppSession.UserName;
             CreateMenuBar();
             regionManager.Regions[PrismManager.MainViewRegionName].RequestNavigate("IndexView");
         }

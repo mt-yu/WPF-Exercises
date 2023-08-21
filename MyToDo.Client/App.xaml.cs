@@ -22,6 +22,21 @@ namespace MyToDo.Client
             return Container.Resolve<MainView>();
         }
 
+        public static void LoginOut(IContainerProvider containerProvider)
+        {
+            Current.MainWindow.Hide();
+            var dialog = containerProvider.Resolve<IDialogService>();
+
+            dialog.ShowDialog("LoginView", callback =>
+            {
+                if (callback.Result != ButtonResult.OK)
+                {
+                    Application.Current.Shutdown();
+                }
+                Current.MainWindow.Show();
+            });
+        }
+
         protected override void OnInitialized()
         {
             var dialog = Container.Resolve<IDialogService>();
