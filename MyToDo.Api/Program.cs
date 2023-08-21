@@ -42,8 +42,8 @@ namespace MyToDo.Api
 
             var app = builder.Build();
 
-            // Configure the HTTP request pipeline.
-            if (app.Environment.IsDevelopment())
+            // Configure the HTTP request pipeline. 测试项目 暂时发布环境也开放 OpenAPI界面
+            //if (app.Environment.IsDevelopment())
             {
                 app.UseSwagger();
                 app.UseSwaggerUI();
@@ -53,6 +53,7 @@ namespace MyToDo.Api
 
 
             app.MapControllers();
+            app.MapSwagger();
 
             app.Run();
         }

@@ -100,3 +100,10 @@
 
 13. 添加查询 与 编辑 通过 在xaml 中添加  behaviors (即: 行为，触发器)
 	1. 优化完成 待办事项 界面交互逻辑
+	1. 
+
+....
+
+通过 iis 部署， 需要除了 打开对应的iis 服务之外 还要装 -> "Hosting Bundle" https://dotnet.microsoft.com/zh-cn/download/dotnet/6.0 根据对应的大版本选择 即可 (参考文章: https://blog.csdn.net/ChaITSimpleLove/article/details/116143193) 
+
+

@@ -21,4 +21,10 @@
     <ProjectReference Include="..\MyToDo.Share\MyToDo.Share.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="to.db">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>

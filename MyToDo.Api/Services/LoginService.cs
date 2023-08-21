@@ -20,8 +20,7 @@ namespace MyToDo.Api.Services
         {
             try
             {
-                Password.GetMD5();
-                var user = await work.GetRepository<User>().GetFirstOrDefaultAsync(predicate: x => x.Account.Equals(Account) && x.PassWord.Equals(Password));
+                var user = await work.GetRepository<User>().GetFirstOrDefaultAsync(predicate: x => x.Account.Equals(Account) && x.PassWord.Equals(Password.GetMD5()));
 
                 if (user == null) 
                 {
