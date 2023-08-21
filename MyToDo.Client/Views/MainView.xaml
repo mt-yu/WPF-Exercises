@@ -39,7 +39,7 @@
                         <ListBox x:Name="menuBar" PreviewMouseLeftButtonUp="menuBar_PreviewMouseLeftButtonUp" Style="{StaticResource MaterialDesignNavigationPrimaryListBox}" ItemsSource="{Binding MenuBars}" Margin="0,16,0,16">
                             <i:Interaction.Triggers>
                                 <i:EventTrigger EventName="SelectionChanged">
-                                    <i:InvokeCommandAction Command="{Binding NavigateCommand}" CommandParameter="{Binding SelectedItem, ElementName=menuBar}"/>
+                                    <i:InvokeCommandAction Command="{Binding NavigateCommand}" CommandParameter="{Binding Path=SelectedItem, RelativeSource={RelativeSource Mode=FindAncestor,AncestorType=ListBox}}"/>
                                 </i:EventTrigger>
                             </i:Interaction.Triggers>
                             <ListBox.Resources>
