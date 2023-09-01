@@ -1,0 +1,47 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net7.0-windows</TargetFramework>
+    <RootNamespace>Sample._1</RootNamespace>
+    <Nullable>enable</Nullable>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Fonts\iconfont.ttf" />
+    <None Remove="Fonts\iconfont2.ttf" />
+    <None Remove="Images\background.png" />
+    <None Remove="Images\chat.jpg" />
+    <None Remove="Images\Image1.jpg" />
+    <None Remove="Images\Image2.jpg" />
+    <None Remove="Images\Image3.jpg" />
+    <None Remove="Images\Image4.jpg" />
+    <None Remove="Images\Image5.jpg" />
+    <None Remove="Images\Image6.jpg" />
+    <None Remove="Images\Image7.jpg" />
+    <None Remove="Images\Image8.jpg" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Fonts\iconfont.ttf">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Fonts\iconfont2.ttf" />
+    <Resource Include="Images\background.png" />
+    <Resource Include="Images\chat.jpg" />
+    <Resource Include="Images\Image1.jpg" />
+    <Resource Include="Images\Image2.jpg" />
+    <Resource Include="Images\Image3.jpg" />
+    <Resource Include="Images\Image4.jpg" />
+    <Resource Include="Images\Image5.jpg" />
+    <Resource Include="Images\Image6.jpg" />
+    <Resource Include="Images\Image7.jpg" />
+    <Resource Include="Images\Image8.jpg" />
+  </ItemGroup>
+
+</Project>

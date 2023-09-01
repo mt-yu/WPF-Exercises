@@ -39,22 +39,26 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MyToDo.UsePrism.Temp", "MyT
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MyToDo.UsePrism.Temp.Core", "MyToDo.UsePrism.Temp\MyToDo.UsePrism.Temp.Core\MyToDo.UsePrism.Temp.Core.csproj", "{62524CE6-0AEB-4C62-8CEF-617B1685D0F5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyToDo.UsePrism2", "MyToDo.UsePrism2\MyToDo.UsePrism2.csproj", "{2D4F5870-43AD-4DB5-A01D-BC1A5CB88D9B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MyToDo.UsePrism2", "MyToDo.UsePrism2\MyToDo.UsePrism2.csproj", "{2D4F5870-43AD-4DB5-A01D-BC1A5CB88D9B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyToDo.UsePrism2.ModuleA", "MyToDo.UsePrism2.ModuleA\MyToDo.UsePrism2.ModuleA.csproj", "{18FA7790-16AA-46CD-9F1F-7A4378F23EC2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MyToDo.UsePrism2.ModuleA", "MyToDo.UsePrism2.ModuleA\MyToDo.UsePrism2.ModuleA.csproj", "{18FA7790-16AA-46CD-9F1F-7A4378F23EC2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyToDo.UsePrism2.ModuleB", "MyToDo.UsePrism2.ModuleB\MyToDo.UsePrism2.ModuleB.csproj", "{B791236E-B729-44EB-95FA-D9066C708316}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MyToDo.UsePrism2.ModuleB", "MyToDo.UsePrism2.ModuleB\MyToDo.UsePrism2.ModuleB.csproj", "{B791236E-B729-44EB-95FA-D9066C708316}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Main", "Main", "{179E611E-558F-4A8D-BFA5-712993FA2374}"
 	ProjectSection(SolutionItems) = preProject
 		readme.md = readme.md
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyToDo.Client", "MyToDo.Client\MyToDo.Client.csproj", "{BA75E9D0-8FFC-42D3-BAD1-E2E931399E29}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MyToDo.Client", "MyToDo.Client\MyToDo.Client.csproj", "{BA75E9D0-8FFC-42D3-BAD1-E2E931399E29}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyToDo.Api", "MyToDo.Api\MyToDo.Api.csproj", "{455A618C-4513-4FE8-8508-6DD87FA917FE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MyToDo.Api", "MyToDo.Api\MyToDo.Api.csproj", "{455A618C-4513-4FE8-8508-6DD87FA917FE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyToDo.Share", "MyToDo.Share\MyToDo.Share.csproj", "{5DD3FA29-CD5D-44E4-A613-30745484F209}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MyToDo.Share", "MyToDo.Share\MyToDo.Share.csproj", "{5DD3FA29-CD5D-44E4-A613-30745484F209}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Sample", "Sample", "{EE6F0199-CE29-4A60-BFB6-12BDF33CCD39}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sample.1", "Sample.1\Sample.1.csproj", "{4C9DE107-68CE-453C-82CB-ED250AE9DF11}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -146,6 +150,10 @@ Global
 		{5DD3FA29-CD5D-44E4-A613-30745484F209}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5DD3FA29-CD5D-44E4-A613-30745484F209}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5DD3FA29-CD5D-44E4-A613-30745484F209}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4C9DE107-68CE-453C-82CB-ED250AE9DF11}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4C9DE107-68CE-453C-82CB-ED250AE9DF11}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4C9DE107-68CE-453C-82CB-ED250AE9DF11}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4C9DE107-68CE-453C-82CB-ED250AE9DF11}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -158,6 +166,7 @@ Global
 		{BA75E9D0-8FFC-42D3-BAD1-E2E931399E29} = {179E611E-558F-4A8D-BFA5-712993FA2374}
 		{455A618C-4513-4FE8-8508-6DD87FA917FE} = {179E611E-558F-4A8D-BFA5-712993FA2374}
 		{5DD3FA29-CD5D-44E4-A613-30745484F209} = {179E611E-558F-4A8D-BFA5-712993FA2374}
+		{4C9DE107-68CE-453C-82CB-ED250AE9DF11} = {EE6F0199-CE29-4A60-BFB6-12BDF33CCD39}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {205674CC-6F6A-4A18-A9D8-7F636D05FBD9}
