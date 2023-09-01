@@ -1,0 +1,27 @@
+﻿<Window x:Class="Sample._2.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width=".2*" />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+
+        <Canvas Grid.ColumnSpan="2">
+            <Canvas.Background>
+                <LinearGradientBrush StartPoint="0.5,0.5" EndPoint="0.5,1">
+                    <GradientStop Offset="0" Color="#232882"/>
+                    <GradientStop Offset="1" Color="#580083"/>
+                </LinearGradientBrush>
+            </Canvas.Background>
+        </Canvas>
+        
+        <StackPanel>
+            <TextBlock Margin="8" Foreground="White" Text="CRICKET" FontWeight="Bold" FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Center" />
+        </StackPanel>
+    </Grid>
+</Window>
