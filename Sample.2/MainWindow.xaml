@@ -4,24 +4,175 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="{Binding Title}" Height="768" Width="1366">
+    <Window.Resources>
+        <Style x:Key="MyRadioButtonStyle" TargetType="{x:Type RadioButton}">
+            <Setter Property="FocusVisualStyle">
+                <Setter.Value>
+                    <Style>
+                        <Setter Property="Control.Template">
+                            <Setter.Value>
+                                <ControlTemplate>
+                                    <Rectangle Margin="2" SnapsToDevicePixels="True" Stroke="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" StrokeThickness="1" StrokeDashArray="1 2" />
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="FontSize" Value="26" />
+            <Setter Property="VerticalContentAlignment" Value="Center" />
+            <Setter Property="HorizontalContentAlignment" Value="Left" />
+            <Setter Property="BorderBrush" Value="Transparent" />
+            <Setter Property="Foreground" Value="Black" />
+            <Setter Property="BorderThickness" Value="0" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type RadioButton}">
+                        <Grid x:Name="templateRoot" Background="Transparent" SnapsToDevicePixels="True">
+                            <Border x:Name="border" BorderBrush="Red" BorderThickness="0" CornerRadius="10"  SnapsToDevicePixels="True" />
+                            <Border x:Name="bd2" />
+                            <ContentPresenter x:Name="contentPresenter" ContentTemplate="{TemplateBinding ContentTemplate}"
+                                          Content="{TemplateBinding Content}" Grid.Column="1"
+                                          ContentStringFormat="{TemplateBinding ContentStringFormat}" Focusable="False"
+                                          HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                          Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
+                                          VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="HasContent" Value="True">
+                                <Setter Property="FocusVisualStyle">
+                                    <Setter.Value>
+                                        <Style>
+                                            <Setter Property="Control.Template">
+                                                <Setter.Value>
+                                                    <ControlTemplate>
+                                                    </ControlTemplate>
+                                                </Setter.Value>
+                                            </Setter>
+                                        </Style>
+                                    </Setter.Value>
+                                </Setter>
+                                <!--<Setter Property="Padding" Value="4,-1,0,0" />-->
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" TargetName="border" Value="Transparent" />
+                            </Trigger>
+                            <Trigger Property="IsChecked" Value="true">
+                                <Setter Property="Background" Value="Transparent" TargetName="border" />
+                            </Trigger>
+                            <Trigger Property="IsChecked" Value="{x:Null}" />
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="MinHeight" Value="50" />
+            <Setter Property="HorizontalAlignment" Value="Stretch" />
+        </Style>
+
+        <ControlTemplate x:Key="roundbutton" TargetType="Button">
+            <Grid>
+                <Border Height="{TemplateBinding Height}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Width="{TemplateBinding Width}" CornerRadius="8" />
+                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+            </Grid>
+        </ControlTemplate>
+    </Window.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width=".2*" />
+            <ColumnDefinition Width="284" />
             <ColumnDefinition />
         </Grid.ColumnDefinitions>
 
-        <Canvas Grid.ColumnSpan="2">
+        <Canvas>
             <Canvas.Background>
                 <LinearGradientBrush StartPoint="0.5,0.5" EndPoint="0.5,1">
-                    <GradientStop Offset="0" Color="#232882"/>
-                    <GradientStop Offset="1" Color="#580083"/>
+                    <GradientStop Offset="0" Color="#373b93" />
+                    <GradientStop Offset="1" Color="#51078e" />
                 </LinearGradientBrush>
             </Canvas.Background>
         </Canvas>
-        
+        <Canvas Grid.Column="1">
+            <Canvas.Background>
+                <LinearGradientBrush StartPoint="0.5,0.5" EndPoint="0.5,1">
+                    <GradientStop Offset="0" Color="#232882" />
+                    <GradientStop Offset="1" Color="#4f058c" />
+                </LinearGradientBrush>
+            </Canvas.Background>
+        </Canvas>
+
         <StackPanel>
-            <TextBlock Margin="8" Foreground="White" Text="CRICKET" FontWeight="Bold" FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Center" />
+            <Grid>
+                <Border Background="#9c9cc9" Width="12" Height="12" CornerRadius="12" Margin="-108, 2, 0, 0" />
+                <TextBlock Margin="32" Foreground="White" Text="CRICKET" FontWeight="Bold" FontSize="32" HorizontalAlignment="Center" VerticalAlignment="Center" />
+            </Grid>
+
+            <ListBox ItemsSource="{Binding Menus}" Background="Transparent" BorderThickness="0" Margin="32, 0">
+                <ListBox.ItemContainerStyle>
+                    <Style TargetType="ListBoxItem">
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="{x:Type ListBoxItem}">
+                                    <Grid>
+                                        <Border Name="border" CornerRadius="8" Margin="0, 4" />
+                                        <ContentPresenter HorizontalAlignment="Left" VerticalAlignment="Center" />
+                                    </Grid>
+                                    <ControlTemplate.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter Property="Background" TargetName="border" Value="#e5e5e5" />
+                                            <Setter Property="Opacity" TargetName="border" Value="0.2" />
+                                        </Trigger>
+                                        <Trigger Property="IsSelected" Value="true">
+                                            <Setter Property="Background" Value="#ffffff" TargetName="border" />
+                                            <Setter Property="Opacity" Value="0.15" TargetName="border" />
+                                        </Trigger>
+                                    </ControlTemplate.Triggers>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </ListBox.ItemContainerStyle>
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <RadioButton Style="{DynamicResource MyRadioButtonStyle}" HorizontalContentAlignment="Left">
+                            <RadioButton.IsChecked>
+                                <Binding Path="IsSelected" RelativeSource="{RelativeSource AncestorType=ListBoxItem}" Mode="TwoWay" />
+                            </RadioButton.IsChecked>
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+                                <TextBlock Grid.Column="0" Text="{Binding Icon}" FontFamily="./Fonts/#iconfont" FontSize="28" Margin="10 0 0 0" Foreground="White" />
+                                <TextBlock Margin="16, 0, 0, 0" Text="{Binding Name}"  FontSize="18" VerticalAlignment="Center"  Foreground="White" />
+                            </StackPanel>
+                        </RadioButton>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
         </StackPanel>
+
+        <Grid Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto" />
+                <RowDefinition />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+
+            <DockPanel Margin="16" LastChildFill="False">
+                <Grid DockPanel.Dock="Right">
+                    <Border Background="Green" BorderBrush="White" BorderThickness="1" Height="8" Width="8" CornerRadius="8" Panel.ZIndex="1" Margin="0, 0, -24, -16" />
+                    <Image  Source="Images/tx.jpeg" Width="32" Height="32">
+                        <Image.Clip>
+                            <EllipseGeometry RadiusX="16" RadiusY="16" Center="16, 16" />
+                        </Image.Clip>
+                    </Image>
+                </Grid>
+
+                <ComboBox DockPanel.Dock="Right" SelectedIndex="0" VerticalContentAlignment="Center" Margin="16, 0">
+                    <ComboBoxItem Content="Select Edition1" />
+                    <ComboBoxItem Content="Select Edition2" />
+                    <ComboBoxItem Content="Select Edition3" /> 
+                    <ComboBoxItem Content="Select Edition4" />
+                </ComboBox>
+
+                <Button DockPanel.Dock="Right" Template="{DynamicResource roundbutton}" Content="&#xe628;" FontFamily="./Fonts/#iconfont" FontSize="24" Width="32" Height="32" Background="Transparent" BorderBrush="White" Foreground="White" BorderThickness="2" />
+            </DockPanel>
+        </Grid>
     </Grid>
 </Window>
