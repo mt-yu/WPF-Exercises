@@ -10,6 +10,7 @@
 
   <ItemGroup>
     <None Remove="Fonts\iconfont.ttf" />
+    <None Remove="Fonts\iconfont2.ttf" />
     <None Remove="Images\backimages.png" />
     <None Remove="Images\left_backimages.png" />
     <None Remove="Images\t1.png" />
@@ -27,6 +28,7 @@
 
   <ItemGroup>
     <Resource Include="Fonts\iconfont.ttf" />
+    <Resource Include="Fonts\iconfont2.ttf" />
     <Resource Include="Images\backimages.png" />
     <Resource Include="Images\left_backimages.png" />
     <Resource Include="Images\t1.png" />

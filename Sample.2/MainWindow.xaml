@@ -76,6 +76,120 @@
                 <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
             </Grid>
         </ControlTemplate>
+
+        <Style x:Key="FocusVisual">
+            <Setter Property="Control.Template">
+                <Setter.Value>
+                    <ControlTemplate>
+                        <Rectangle Margin="2" StrokeDashArray="1 2" Stroke="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" SnapsToDevicePixels="true" StrokeThickness="1" />
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <SolidColorBrush x:Key="Button.Static.Background" Color="#1ec9ff" />
+        <SolidColorBrush x:Key="Button.Static.Border" Color="Transparent" />
+        <SolidColorBrush x:Key="Button.MouseOver.Background" Color="#FFBEE6FD" />
+        <SolidColorBrush x:Key="Button.MouseOver.Border" Color="Transparent" />
+        <SolidColorBrush x:Key="Button.Pressed.Background" Color="#FFC4E5F6" />
+        <SolidColorBrush x:Key="Button.Pressed.Border" Color="Transparent" />
+        <SolidColorBrush x:Key="Button.Disabled.Background" Color="#FFF4F4F4" />
+        <SolidColorBrush x:Key="Button.Disabled.Border" Color="#FFADB2B5" />
+        <SolidColorBrush x:Key="Button.Disabled.Foreground" Color="#FF838383" />
+        <Style x:Key="MyButtonStyle" TargetType="{x:Type Button}">
+            <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}" />
+            <Setter Property="Background" Value="{StaticResource Button.Static.Background}" />
+            <Setter Property="BorderBrush" Value="{StaticResource Button.Static.Border}" />
+            <Setter Property="Foreground" Value="White" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="FontWeight" Value="Bold" />
+            <Setter Property="FontSize" Value="14          " />
+            <Setter Property="HorizontalContentAlignment" Value="Center" />
+            <Setter Property="VerticalContentAlignment" Value="Center" />
+            <Setter Property="Padding" Value="1" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border x:Name="border" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" SnapsToDevicePixels="true" CornerRadius="32">
+                            <ContentPresenter x:Name="contentPresenter" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsDefaulted" Value="true">
+                                <Setter Property="BorderBrush" TargetName="border" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}" />
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="true">
+                                <Setter Property="Background" TargetName="border" Value="{StaticResource Button.MouseOver.Background}" />
+                                <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource Button.MouseOver.Border}" />
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="true">
+                                <Setter Property="Background" TargetName="border" Value="{StaticResource Button.Pressed.Background}" />
+                                <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource Button.Pressed.Border}" />
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter Property="Background" TargetName="border" Value="{StaticResource Button.Disabled.Background}" />
+                                <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource Button.Disabled.Border}" />
+                                <Setter Property="TextElement.Foreground" TargetName="contentPresenter" Value="{StaticResource Button.Disabled.Foreground}" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <!--<SolidColorBrush x:Key="ProgressBar.Progress" Color="#FF06B025" />-->
+        <SolidColorBrush x:Key="ProgressBar.Background" Color="#777d5eae" />
+        <SolidColorBrush x:Key="ProgressBar.Border" Color="Transparent" />
+        <LinearGradientBrush x:Key="ProgressBar.Progress" StartPoint="0.1,0" EndPoint="0.5,1">
+            <GradientStop Offset="0" Color="#7d78b0" />
+            <GradientStop Offset="1" Color="#ffffff" />
+        </LinearGradientBrush>
+        <Style x:Key="MyProgressBarStyle" TargetType="{x:Type ProgressBar}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type ProgressBar}">
+                        <Grid Height="10" MinWidth="50" Background="{TemplateBinding Background}">
+                            <VisualStateManager.VisualStateGroups>
+                                <VisualStateGroup x:Name="CommonStates">
+                                    <VisualState x:Name="Determinate" />
+                                    <VisualState x:Name="Indeterminate">
+                                        <Storyboard>
+                                            <ObjectAnimationUsingKeyFrames Duration="00:00:00"
+                                                                           Storyboard.TargetName="PART_Indicator"
+                                                                           Storyboard.TargetProperty="Background">
+                                                <DiscreteObjectKeyFrame KeyTime="00:00:00">
+                                                    <DiscreteObjectKeyFrame.Value>
+                                                        <SolidColorBrush>Transparent</SolidColorBrush>
+                                                    </DiscreteObjectKeyFrame.Value>
+                                                </DiscreteObjectKeyFrame>
+                                            </ObjectAnimationUsingKeyFrames>
+                                        </Storyboard>
+                                    </VisualState>
+                                </VisualStateGroup>
+                            </VisualStateManager.VisualStateGroups>
+                            <Border x:Name="PART_Track" CornerRadius="4" BorderThickness="0" Background="{StaticResource ProgressBar.Background}"
+                                    BorderBrush="Transparent">
+                            </Border>
+
+                            <Border CornerRadius="4,0,0,4" BorderThickness="0" x:Name="PART_Indicator"
+                                    HorizontalAlignment="Left" Background="{StaticResource ProgressBar.Progress}"
+                                    BorderBrush="Orange">
+                                <Border.Style>
+                                    <Style TargetType="Border">
+                                        <Setter Property="CornerRadius" Value="4,0,0,4" />
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding Path=Value, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ProgressBar}}}" Value="100">
+                                                <Setter Property="CornerRadius" Value="4" />
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Border.Style>
+                            </Border>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="Foreground" Value="Transparent" />
+        </Style>
     </Window.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
@@ -150,7 +264,7 @@
         <Grid Grid.Column="1">
             <Grid.RowDefinitions>
                 <RowDefinition Height="auto" />
-                <RowDefinition />
+                <RowDefinition Height=".25*" />
                 <RowDefinition />
             </Grid.RowDefinitions>
 
@@ -164,15 +278,251 @@
                     </Image>
                 </Grid>
 
-                <ComboBox DockPanel.Dock="Right" SelectedIndex="0" VerticalContentAlignment="Center" Margin="16, 0">
+                <ComboBox Style="{DynamicResource MyComboBoxStyle}" DockPanel.Dock="Right" SelectedIndex="0" VerticalContentAlignment="Center" Margin="16, 0">
                     <ComboBoxItem Content="Select Edition1" />
                     <ComboBoxItem Content="Select Edition2" />
-                    <ComboBoxItem Content="Select Edition3" /> 
+                    <ComboBoxItem Content="Select Edition3" />
                     <ComboBoxItem Content="Select Edition4" />
                 </ComboBox>
 
                 <Button DockPanel.Dock="Right" Template="{DynamicResource roundbutton}" Content="&#xe628;" FontFamily="./Fonts/#iconfont" FontSize="24" Width="32" Height="32" Background="Transparent" BorderBrush="White" Foreground="White" BorderThickness="2" />
             </DockPanel>
+            <UniformGrid Grid.Row="1" Columns="3">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition />
+                        <ColumnDefinition Width=".4*" />
+                    </Grid.ColumnDefinitions>
+                    <Grid  Margin="8">
+                        <Border Background="White" CornerRadius="8" />
+                        <DockPanel VerticalAlignment="Center">
+                            <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" HorizontalAlignment="Left" Margin="8">
+                                <TextBlock Margin="8, 0" Text="&#xf0164;" FontFamily="./Fonts/#iconfont" FontSize="16" Foreground="#ff701d" />
+                                <TextBlock Text="Match Delayed By Rain" FontFamily="./Fonts/#iconfont" FontSize="16" Foreground="#ff701d" />
+                            </StackPanel>
+                            <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" HorizontalAlignment="Left" Margin="8">
+                                <Image Margin="8, 0" Source="Images/t1.png" Width="16" Height="16">
+                                    <Image.Clip>
+                                        <EllipseGeometry RadiusX="8" RadiusY="8" Center="8, 8" />
+                                    </Image.Clip>
+                                </Image>
+                                <TextBlock Text="SA" FontWeight="Bold" FontSize="16" Foreground="Black" />
+                                <TextBlock Margin="8, 0" Text="29/2 (7.3/50 ov)" FontSize="16" Foreground="Gray" />
+                            </StackPanel>
+                            <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" HorizontalAlignment="Left" Margin="8">
+                                <Image Margin="8, 0" Source="Images/t2.png" Width="16" Height="16">
+                                    <Image.Clip>
+                                        <EllipseGeometry RadiusX="8" RadiusY="8" Center="8, 8" />
+                                    </Image.Clip>
+                                </Image>
+                                <TextBlock Text="WI" FontWeight="Bold" FontSize="16" Foreground="Black" />
+                            </StackPanel>
+                        </DockPanel>
+                    </Grid>
+                    <Grid Grid.Column="1"  Margin="8">
+                        <Border Grid.Column="1" Background="#6debff" CornerRadius="8" />
+                        <StackPanel  VerticalAlignment="Center" Margin="0,24,0,0">
+                            <TextBlock Text="WORLD" Foreground="White" FontWeight="Bold" HorizontalAlignment="Center" />
+                            <TextBlock Text="CUP" Foreground="White" FontWeight="Bold" HorizontalAlignment="Center" />
+                            <TextBlock Text="Watch Top" Foreground="White" Opacity=".5" HorizontalAlignment="Center" />
+                            <TextBlock Text="Events" Foreground="White" Opacity=".5" HorizontalAlignment="Center" />
+                            <TextBlock Text="&#xe6dc;" Margin="0, 8" FontFamily="./Fonts/#iconfont" Foreground="White" HorizontalAlignment="Center" />
+                        </StackPanel>
+                    </Grid>
+                </Grid>
+
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition />
+                        <ColumnDefinition Width=".4*" />
+                    </Grid.ColumnDefinitions>
+                    <Grid  Margin="8">
+                        <Border Background="White" CornerRadius="8" />
+                        <DockPanel VerticalAlignment="Center">
+                            <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" HorizontalAlignment="Left" Margin="8">
+                                <Border Margin="8, 0" Background="#58e73b" CornerRadius="12" Width="12" Height="12" />
+                                <TextBlock Text="Live-Updates only" FontFamily="./Fonts/#iconfont" FontSize="16" Foreground="#ff701d" />
+                            </StackPanel>
+                            <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" HorizontalAlignment="Left" Margin="8">
+                                <Image Margin="8, 0" Source="Images/t1.png" Width="16" Height="16">
+                                    <Image.Clip>
+                                        <EllipseGeometry RadiusX="8" RadiusY="8" Center="8, 8" />
+                                    </Image.Clip>
+                                </Image>
+                                <TextBlock Text="IND-A" FontWeight="Bold" FontSize="16" Foreground="Black" />
+                                <TextBlock Margin="96, 0, 0, 0" Text="291/8" FontSize="16" Foreground="Gray" />
+                            </StackPanel>
+                            <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" HorizontalAlignment="Left" Margin="8">
+                                <Image Margin="8, 0" Source="Images/t2.png" Width="16" Height="16">
+                                    <Image.Clip>
+                                        <EllipseGeometry RadiusX="8" RadiusY="8" Center="8, 8" />
+                                    </Image.Clip>
+                                </Image>
+                                <TextBlock Text="SL-A" FontWeight="Bold" FontSize="16" Foreground="Black" />
+                                <TextBlock VerticalAlignment="Center" Margin="40, 0, 0, 0" Text="137/2)35/50 ov,Target 292" FontSize="9" Foreground="Gray" />
+                            </StackPanel>
+                        </DockPanel>
+                    </Grid>
+                    <Grid Grid.Column="1"  Margin="8">
+                        <Border Grid.Column="1" Background="#ff1e50     " CornerRadius="8" />
+                        <StackPanel  VerticalAlignment="Center" Margin="0,24,0,0">
+                            <TextBlock Text="ICC" Foreground="White" FontWeight="Bold" HorizontalAlignment="Center" />
+                            <TextBlock Text="WOMENS" Foreground="White" FontWeight="Bold" HorizontalAlignment="Center" />
+                            <TextBlock Text="CHAMP" Foreground="White" FontWeight="Bold" HorizontalAlignment="Center" />
+                            <TextBlock Text="&#xe6dc;" Margin="0, 8" FontFamily="./Fonts/#iconfont" Foreground="White" HorizontalAlignment="Center" />
+                        </StackPanel>
+                    </Grid>
+                </Grid>
+
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition />
+                        <ColumnDefinition Width=".4*" />
+                    </Grid.ColumnDefinitions>
+                    <Grid  Margin="8">
+                        <Border Background="White" CornerRadius="8" />
+                        <DockPanel VerticalAlignment="Center">
+                            <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" HorizontalAlignment="Left" Margin="8">
+                                <TextBlock Margin="32,0,0,0" Text="Result" FontSize="16" Foreground="#58e73b" />
+                            </StackPanel>
+                            <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" HorizontalAlignment="Left" Margin="8">
+                                <Image Margin="8, 0" Source="Images/t8.png" Width="16" Height="16">
+                                    <Image.Clip>
+                                        <EllipseGeometry RadiusX="8" RadiusY="8" Center="8, 8" />
+                                    </Image.Clip>
+                                </Image>
+                                <TextBlock Text="SA" FontWeight="Bold" FontSize="16" Foreground="Black" />
+                                <TextBlock Margin="96, 0, 0, 0" Text="291/8" FontSize="16" Foreground="Gray" />
+                            </StackPanel>
+                            <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" HorizontalAlignment="Left" Margin="8">
+                                <Image Margin="8, 0" Source="Images/t2.png" Width="16" Height="16">
+                                    <Image.Clip>
+                                        <EllipseGeometry RadiusX="8" RadiusY="8" Center="8, 8" />
+                                    </Image.Clip>
+                                </Image>
+                                <TextBlock Text="WI-W" FontWeight="Bold" FontSize="16" Foreground="Black" />
+                                <TextBlock VerticalAlignment="Center" Margin="28, 0, 0, 0" Text="876(28 ov. Target 209" FontSize="9" Foreground="Gray" />
+                            </StackPanel>
+                        </DockPanel>
+                    </Grid>
+                    <Grid Grid.Column="1"  Margin="8">
+                        <Border Grid.Column="1" Background="#fcdf1f" CornerRadius="8" />
+                        <StackPanel  VerticalAlignment="Center" Margin="0,24,0,0">
+                            <TextBlock Text="Country" Foreground="White" FontWeight="Bold" HorizontalAlignment="Center" />
+                            <TextBlock Text="DIV" Foreground="White" FontWeight="Bold" HorizontalAlignment="Center" />
+                            <TextBlock Text="1" Foreground="White" FontWeight="Bold" HorizontalAlignment="Center" />
+                            <TextBlock Text="&#xe6dc;" Margin="0, 8" FontFamily="./Fonts/#iconfont" Foreground="White" HorizontalAlignment="Center" />
+                        </StackPanel>
+                    </Grid>
+                </Grid>
+            </UniformGrid>
+            <Grid Grid.Row="2" Margin="0, 32, 0, 0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height=".3*" />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition Width=".7*" />
+                </Grid.ColumnDefinitions>
+                <Grid Margin="8">
+                    <Image Source="Images/t4.jpg" Panel.ZIndex="1" HorizontalAlignment="Left" Margin="-70, -20, 0, 0" />
+                    <Border Background="White" Opacity=".1" CornerRadius="24" />
+                    <StackPanel HorizontalAlignment="Left" VerticalAlignment="Center">
+                        <TextBlock Text="I have decided to move on' -Yuvraj Singh" Foreground="White" FontSize="18" Margin="160, 0, 0, 0" />
+                        <TextBlock Text="Announces international,IPL retirement" Foreground="White" FontSize="18" Margin="160, 0, 0, 0" />
+                        <TextBlock Text="Allrounder, who last played for India in June 2017," Foreground="White" Opacity=".5" FontSize="14" Margin="160, 8, 0, 0" />
+                        <TextBlock Text="has decided to hang up his boots after a..." Foreground="White" Opacity=".5" FontSize="14" Margin="160, 0, 0, 0" />
+                    </StackPanel>
+                </Grid>
+                <UniformGrid Grid.Row="1" Columns="2" Margin="8, 16, 8, 8">
+                    <Grid Margin="8">
+                        <Border Background="White" Opacity=".1" CornerRadius="24" />
+                        <DockPanel LastChildFill="False">
+                            <Grid DockPanel.Dock="Top" Margin="0, -40, 0, 0">
+                                <Image Source="Images/t5.png" VerticalAlignment="Top" />
+                                <TextBlock Text="&#xe621;" FontFamily="./Fonts/#iconfont" Foreground="Red" FontSize="64" VerticalAlignment="Center" HorizontalAlignment="Center" Cursor="Hand" />
+                            </Grid>
+                            <StackPanel DockPanel.Dock="Top" HorizontalAlignment="Center" Margin="32">
+                                <TextBlock  Text="Kohli tells India fans not to boo Smith" Foreground="White" Width="220" FontSize="18" TextWrapping="Wrap" />
+                                <TextBlock  Text="India captain makes intervention from the middle after &quot;Cheater!&quot; chants directed at Steven Smith" Foreground="White" Opacity=".5" Width="220" FontSize="11" TextWrapping="Wrap" />
+                                <TextBlock Opacity=".5" Width="220" Margin="0,16,0,0">
+                                      <Hyperlink NavigateUri="https://www.google.com" Foreground="#E0D1EA" FontWeight="Bold" FontSize="18">READ FULL STORY
+                                      </Hyperlink>
+                                </TextBlock>
+                            </StackPanel>
+                        </DockPanel>
+                    </Grid>
+                    <Grid Margin="8">
+                        <Border Background="White" Opacity=".1" CornerRadius="24" />
+                        <DockPanel LastChildFill="False">
+                            <Grid DockPanel.Dock="Top"  Margin="0, -40, 0, 0">
+                                <Image Source="Images/t6.png" VerticalAlignment="Top" />
+                                <TextBlock Text="&#xe621;" FontFamily="./Fonts/#iconfont" Foreground="Red" FontSize="64" VerticalAlignment="Center" HorizontalAlignment="Center" Cursor="Hand" />
+                            </Grid>
+                            <StackPanel DockPanel.Dock="Top" HorizontalAlignment="Center" Margin="32">
+                                <TextBlock  Text="The curious story of the bails that lost their zing" Foreground="White" Width="220" FontSize="18" TextWrapping="Wrap" />
+                                <TextBlock  Text="Jasprit Bumarah to David Wrner was the fifth instance at this World Cup of a batsman surviving ..." Foreground="White" Opacity=".5" Width="220" FontSize="11" TextWrapping="Wrap" />
+                                <TextBlock Opacity=".5" Width="220" Margin="0,16,0,0">
+                             <Hyperlink NavigateUri="https://www.baidu.com" Foreground="#E0D1EA" FontWeight="Bold" FontSize="18">READ FULL STORY
+                             </Hyperlink>
+                                </TextBlock>
+                            </StackPanel>
+                        </DockPanel>
+                    </Grid>
+                </UniformGrid>
+                <Grid Margin="8, 8, 8, 16" Grid.Column="1" Grid.RowSpan="2">
+                    <Border Background="White" Opacity=".1" CornerRadius="24" />
+                    <UniformGrid Rows="5" Margin="32, 0">
+                        <DockPanel Margin="8" VerticalAlignment="Center" LastChildFill="False">
+                            <TextBlock DockPanel.Dock="Left" Text="Time is running out! Predict who will win the World Cup" Foreground="White" FontSize="18" TextWrapping="Wrap" Width="200" />
+                            <Button DockPanel.Dock="Right" Style="{DynamicResource MyButtonStyle}" Content="PLAY NOW" Height="64" Width="120" />
+                        </DockPanel>
+                        <Grid Margin="8">
+                            <Border Background="White" Opacity=".1" CornerRadius="16" />
+                            <StackPanel Orientation="Horizontal">
+                                <Image Source="Images/t7.png" Width="64" Height="64" HorizontalAlignment="Left" Margin="8,0,0,0">
+                                    <Image.Clip>
+                                        <EllipseGeometry RadiusX="32" RadiusY="32" Center="32, 32" />
+                                    </Image.Clip>
+                                </Image>
+                                <StackPanel Margin="16" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                    <TextBlock Text="Australia" FontSize="18" Foreground="White" FontWeight="Bold" />
+                                    <ProgressBar Style="{DynamicResource MyProgressBarStyle}" Value="35" Height="16" Width="240" />
+                                </StackPanel>
+                            </StackPanel>
+                        </Grid>
+                        <Grid Margin="8">
+                            <Border Background="White" Opacity=".1" CornerRadius="16" />
+                            <StackPanel Orientation="Horizontal">
+                                <Image Source="Images/t9.png" Width="64" Height="64" HorizontalAlignment="Left" Margin="8,0,0,0">
+                                    <Image.Clip>
+                                        <EllipseGeometry RadiusX="32" RadiusY="32" Center="32, 32" />
+                                    </Image.Clip>
+                                </Image>
+                                <StackPanel Margin="16" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                    <TextBlock Text="India" FontSize="18" Foreground="White" FontWeight="Bold" />
+                                    <ProgressBar Style="{DynamicResource MyProgressBarStyle}" Value="85" Height="16" Width="240" />
+                                </StackPanel>
+                            </StackPanel>
+                        </Grid>
+                        <Grid Margin="8">
+                            <Border Background="White" Opacity=".1" CornerRadius="16" />
+                            <StackPanel Orientation="Horizontal">
+                                <Image Source="Images/t8.png" Width="64" Height="64" HorizontalAlignment="Left" Margin="8,0,0,0">
+                                    <Image.Clip>
+                                        <EllipseGeometry RadiusX="32" RadiusY="32" Center="32, 32" />
+                                    </Image.Clip>
+                                </Image>
+                                <StackPanel Margin="16" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                    <TextBlock Text="England" FontSize="18" Foreground="White" FontWeight="Bold" />
+                                    <ProgressBar Style="{DynamicResource MyProgressBarStyle}" Value="60" Height="16" Width="240" />
+                                </StackPanel>
+                            </StackPanel>
+                        </Grid>
+                    </UniformGrid>
+                </Grid>
+            </Grid>
         </Grid>
     </Grid>
 </Window>
