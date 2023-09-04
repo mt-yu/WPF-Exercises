@@ -1,0 +1,352 @@
+﻿<Window x:Class="Sample._3.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:lvc="clr-namespace:LiveChartsCore.SkiaSharpView.WPF;assembly=LiveChartsCore.SkiaSharpView.WPF"
+        xmlns:vms="clr-namespace:Sample._3.ViewModel"
+        xmlns:model="clr-namespace:Sample._3.Models"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="1080" Width="1980" WindowStyle="None" AllowsTransparency="True" WindowState="Maximized">
+    <Window.DataContext>
+        <vms:MainViewModel />
+    </Window.DataContext>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width=".2*" />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+
+        <Grid>
+            <Grid.Background>
+                <ImageBrush ImageSource="Images/background.jpg" Stretch="UniformToFill" Opacity=".2" />
+            </Grid.Background>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="80" />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+            <TextBlock Text="MICROSOFT STORE" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="22" FontWeight="Light" />
+            <Border Margin="30, 0" BorderBrush="Gainsboro" BorderThickness="0 0 0 1" />
+            <StackPanel Grid.Row="1">
+                <Button Margin="16, 0" Height="60" materialDesign:ElevationAssist.Elevation="Dp4" Style="{StaticResource MaterialDesignRaisedButton}" HorizontalContentAlignment="Left" Background="#9C27B3">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="&#xe679;" FontFamily="./Fonts/#iconfont" Foreground="White" FontSize="26" VerticalAlignment="Center" />
+                        <TextBlock Text="Surface" Margin="8,0,0,0" Foreground="White" VerticalAlignment="Center" />
+                    </StackPanel>
+                </Button>
+
+                <Button Margin="16, 8" Height="60" materialDesign:ElevationAssist.Elevation="Dp4" Style="{StaticResource MaterialDesignFlatLightButton}" HorizontalContentAlignment="Left">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="&#xe66e;" FontFamily="./Fonts/#iconfont" Foreground="#848484" FontSize="26" VerticalAlignment="Center" />
+                        <TextBlock Text="Bing" Margin="8,0,0,0" Foreground="#848484" VerticalAlignment="Center" />
+                    </StackPanel>
+                </Button>
+
+                <Button Margin="16, 8" Height="60" materialDesign:ElevationAssist.Elevation="Dp4" Style="{StaticResource MaterialDesignFlatLightButton}" HorizontalContentAlignment="Left">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="&#xe518;" FontFamily="./Fonts/#iconfont" Foreground="#848484" FontSize="26" VerticalAlignment="Center" />
+                        <TextBlock Text="Windows" Margin="8,0,0,0" Foreground="#848484" VerticalAlignment="Center" />
+                    </StackPanel>
+                </Button>
+
+                <Button Margin="16, 8" Height="60" materialDesign:ElevationAssist.Elevation="Dp4" Style="{StaticResource MaterialDesignFlatLightButton}" HorizontalContentAlignment="Left">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="&#xe7ee;" FontFamily="./Fonts/#iconfont" Foreground="#848484" FontSize="26" VerticalAlignment="Center" />
+                        <TextBlock Text="Xbox" Margin="8,0,0,0" Foreground="#848484" VerticalAlignment="Center" />
+                    </StackPanel>
+                </Button>
+
+                <Button Margin="16, 8" Height="60" materialDesign:ElevationAssist.Elevation="Dp4" Style="{StaticResource MaterialDesignFlatLightButton}" HorizontalContentAlignment="Left">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="&#xec66;" FontFamily="./Fonts/#iconfont" Foreground="#848484" FontSize="26" VerticalAlignment="Center" />
+                        <TextBlock Text="HoloLens" Margin="8,0,0,0" Foreground="#848484" VerticalAlignment="Center" />
+                    </StackPanel>
+                </Button>
+
+                <Button Margin="16, 8" Height="60" materialDesign:ElevationAssist.Elevation="Dp4" Style="{StaticResource MaterialDesignFlatLightButton}" HorizontalContentAlignment="Left">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="&#xe607;" FontFamily="./Fonts/#iconfont" Foreground="#848484" FontSize="26" VerticalAlignment="Center" />
+                        <TextBlock Text="Azure" Margin="8,0,0,0" Foreground="#848484" VerticalAlignment="Center" />
+                    </StackPanel>
+                </Button>
+            </StackPanel>
+        </Grid>
+
+        <Grid Grid.Column="1" Background="#eeeeee">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="80" />
+                <RowDefinition Height="200" />
+                <RowDefinition />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+            <TextBlock Text="Material Design" FontSize="22" Margin="48, 0, 0, 0" VerticalAlignment="Center" />
+
+            <UniformGrid Grid.Row="1" Columns="4" Margin="48, 8">
+                <Grid Margin="8, 0">
+                    <Border Background="White" CornerRadius="8">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="1.7*" />
+                                <RowDefinition />
+                            </Grid.RowDefinitions>
+
+                            <Button Width="100" Height="100" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="16, -16, 0 , 0" Background="#92C202" BorderThickness="0"  materialDesign:ElevationAssist.Elevation="Dp8">
+                                <TextBlock Text="&#xe679;" FontFamily="./Fonts/#iconfont" FontSize="48" />
+                            </Button>
+
+                            <StackPanel>
+                                <TextBlock Text="Surface" Foreground="#C2C2C2" FontSize="24" HorizontalAlignment="Right" Margin="0, 16, 16, 0" FontWeight="Light" />
+                                <TextBlock Text="$999" Foreground="#848484" FontSize="32" HorizontalAlignment="Right" Margin="16, 0" />
+                            </StackPanel>
+
+                            <Border BorderBrush="#E3E3E3" BorderThickness="0, 0, 0, 1" Margin="32, 0" VerticalAlignment="Bottom" />
+
+                            <TextBlock Grid.Row="1" Text="Get More Products" FontSize="24" Foreground="#848484" FontWeight="Light" VerticalAlignment="Center" Margin="16" />
+                        </Grid>
+                    </Border>
+                </Grid>
+
+                <Grid Margin="8, 0">
+                    <Border Background="White" CornerRadius="8">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="1.7*" />
+                                <RowDefinition />
+                            </Grid.RowDefinitions>
+
+                            <Button Width="100" Height="100" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="16, -16, 0 , 0" Background="#F8682C" BorderThickness="0"  materialDesign:ElevationAssist.Elevation="Dp8">
+                                <TextBlock Text="&#xe518;" FontFamily="./Fonts/#iconfont" FontSize="48" />
+                            </Button>
+
+                            <StackPanel>
+                                <TextBlock Text="Windows" Foreground="#C2C2C2" FontSize="24" HorizontalAlignment="Right" Margin="0, 16, 16, 0" FontWeight="Light" />
+                                <TextBlock Text="$299" Foreground="#848484" FontSize="32" HorizontalAlignment="Right" Margin="16, 0" />
+                            </StackPanel>
+
+                            <Border BorderBrush="#E3E3E3" BorderThickness="0, 0, 0, 1" Margin="32, 0" VerticalAlignment="Bottom" />
+
+                            <TextBlock Grid.Row="1" Text="Get More Products" FontSize="24" Foreground="#848484" FontWeight="Light" VerticalAlignment="Center" Margin="16" />
+                        </Grid>
+                    </Border>
+                </Grid>
+
+                <Grid Margin="8, 0">
+                    <Border Background="White" CornerRadius="8">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="1.7*" />
+                                <RowDefinition />
+                            </Grid.RowDefinitions>
+
+                            <Button Width="100" Height="100" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="16, -16, 0 , 0" Background="#00B2EE" BorderThickness="0"  materialDesign:ElevationAssist.Elevation="Dp8">
+                                <TextBlock Text="&#xe7ee;" FontFamily="./Fonts/#iconfont" FontSize="48" />
+                            </Button>
+
+                            <StackPanel>
+                                <TextBlock Text="Xbox" Foreground="#C2C2C2" FontSize="24" HorizontalAlignment="Right" Margin="0, 16, 16, 0" FontWeight="Light" />
+                                <TextBlock Text="$599" Foreground="#848484" FontSize="32" HorizontalAlignment="Right" Margin="16, 0" />
+                            </StackPanel>
+
+                            <Border BorderBrush="#E3E3E3" BorderThickness="0, 0, 0, 1" Margin="32, 0" VerticalAlignment="Bottom" />
+
+                            <TextBlock Grid.Row="1" Text="Get More Products" FontSize="24" Foreground="#848484" FontWeight="Light" VerticalAlignment="Center" Margin="16" />
+                        </Grid>
+                    </Border>
+                </Grid>
+
+                <Grid Margin="8, 0">
+                    <Border Background="White" CornerRadius="8">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="1.7*" />
+                                <RowDefinition />
+                            </Grid.RowDefinitions>
+
+                            <Button Width="100" Height="100" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="16, -16, 0 , 0" Background="#FEC103" BorderThickness="0"  materialDesign:ElevationAssist.Elevation="Dp8">
+                                <TextBlock Text="&#xe66e;" FontFamily="./Fonts/#iconfont" FontSize="48" />
+                            </Button>
+
+                            <StackPanel>
+                                <TextBlock Text="Surface" Foreground="#C2C2C2" FontSize="24" HorizontalAlignment="Right" Margin="0, 16, 16, 0" FontWeight="Light" />
+                                <TextBlock Text="$999" Foreground="#848484" FontSize="32" HorizontalAlignment="Right" Margin="16, 0" />
+                            </StackPanel>
+
+                            <Border BorderBrush="#E3E3E3" BorderThickness="0, 0, 0, 1" Margin="32, 0" VerticalAlignment="Bottom" />
+
+                            <TextBlock Grid.Row="1" Text="Get More Products" FontSize="24" Foreground="#848484" FontWeight="Light" VerticalAlignment="Center" Margin="16" />
+                        </Grid>
+                    </Border>
+                </Grid>
+            </UniformGrid>
+
+            <UniformGrid Grid.Row="2" Columns="3" Margin="48, 48">
+                <Grid Margin="8, 0">
+                    <Border Background="White" CornerRadius="8">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="1.6*" />
+                                <RowDefinition />
+                            </Grid.RowDefinitions>
+                            <Border Background="#51AB54" CornerRadius="4" Margin="16, -16, 16, 0">
+                                <lvc:CartesianChart Series="{Binding Series}" XAxes="{Binding XAxes}" YAxes="{Binding YAxes}" Margin="16, 0" />
+                            </Border>
+                            <DockPanel Margin="16" Grid.Row="1" LastChildFill="False">
+                                <TextBlock DockPanel.Dock="Top" Text="Daily Sales" FontSize="18" />
+                                <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" Margin="0, 4, 0, 0">
+                                    <TextBlock Text="↑55%" Foreground="DarkGreen" FontSize="12" Margin="0, 0, 4, 0" />
+                                    <TextBlock Text="increase in today sales." Foreground="#848484" FontSize="12" />
+                                </StackPanel>
+                                <Border DockPanel.Dock="Top" BorderBrush="Gray" Opacity=".5" BorderThickness="0,0,0,1" Margin="0, 8" />
+                                <StackPanel DockPanel.Dock="Top" Orientation="Horizontal">
+                                    <TextBlock Text="&#xe78b;" FontFamily="./Fonts/#iconfont" VerticalAlignment="Center" Foreground="#848484" FontSize="12" Margin="0, 0, 4, 0" />
+                                    <TextBlock Text="increase in today sales." Foreground="#848484" FontSize="12" />
+                                </StackPanel>
+                            </DockPanel>
+                        </Grid>
+                    </Border>
+                </Grid>
+
+                <Grid Margin="8, 0">
+                    <Border Background="White" CornerRadius="8">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="1.6*" />
+                                <RowDefinition />
+                            </Grid.RowDefinitions>
+                            <Border Background="#FD950E" CornerRadius="4" Margin="16, -16, 16, 0">
+                                <lvc:CartesianChart Series="{Binding Series2}" XAxes="{Binding XAxes2}" YAxes="{Binding YAxes2}" Margin="16, 0" />
+                            </Border>
+                            <DockPanel Margin="16" Grid.Row="1" LastChildFill="False">
+                                <TextBlock DockPanel.Dock="Top" Text="Email Subscriptions" FontSize="18" />
+                                <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" Margin="0, 4, 0, 0">
+                                    <TextBlock Text="Last Campaign Performance" Foreground="#848484" FontSize="12" />
+                                </StackPanel>
+                                <Border DockPanel.Dock="Top" BorderBrush="Gray" Opacity=".5" BorderThickness="0,0,0,1" Margin="0, 8" />
+                                <StackPanel DockPanel.Dock="Top" Orientation="Horizontal">
+                                    <TextBlock Text="&#xe78b;" FontFamily="./Fonts/#iconfont" VerticalAlignment="Center" Foreground="#848484" FontSize="12" Margin="0, 0, 4, 0" />
+                                    <TextBlock Text="campaign sent 2 days ago" Foreground="#848484" FontSize="12" />
+                                </StackPanel>
+                            </DockPanel>
+                        </Grid>
+                    </Border>
+                </Grid>
+
+                <Grid Margin="8, 0">
+                    <Border Background="White" CornerRadius="8">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="1.6*" />
+                                <RowDefinition />
+                            </Grid.RowDefinitions>
+                            <Border Background="#E94543" CornerRadius="4" Margin="16, -16, 16, 0">
+                                <lvc:CartesianChart Series="{Binding Series3}" XAxes="{Binding XAxes3}" YAxes="{Binding YAxes3}" Margin="16, 0" />
+                            </Border>
+                            <DockPanel Margin="16" Grid.Row="1" LastChildFill="False">
+                                <TextBlock DockPanel.Dock="Top" Text="Completed Tasks" FontSize="18" />
+                                <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" Margin="0, 4, 0, 0">
+                                    <TextBlock Text="Last Campaign Performance" Foreground="#848484" FontSize="12" />
+                                </StackPanel>
+                                <Border DockPanel.Dock="Top" BorderBrush="Gray" Opacity=".5" BorderThickness="0,0,0,1" Margin="0, 8" />
+                                <StackPanel DockPanel.Dock="Top" Orientation="Horizontal">
+                                    <TextBlock Text="&#xe78b;" FontFamily="./Fonts/#iconfont" VerticalAlignment="Center" Foreground="#848484" FontSize="12" Margin="0, 0, 4, 0" />
+                                    <TextBlock Text="campaign sent 2 days ago" Foreground="#848484" FontSize="12" />
+                                </StackPanel>
+                            </DockPanel>
+                        </Grid>
+                    </Border>
+                </Grid>
+            </UniformGrid>
+            <UniformGrid Grid.Row="3" Columns="2">
+                <Border Background="White" CornerRadius="16" Margin="48">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height=".3*" />
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
+                        <Border Background="#952CAD" CornerRadius="8" Margin="16, -16, 16, 0" >
+                           
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="Tasks" Foreground="White" FontSize="22" VerticalAlignment="Center" Margin="8"/>
+                                <Button Height="56" Width="120" Background="#c07fcd" BorderBrush="#c07fcd">
+                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                        <materialDesign:PackIcon Kind="Bug" VerticalAlignment="Center" Margin="8, 0"/>
+                                        <TextBlock Text="Bugs" VerticalAlignment="Center"/>
+                                    </StackPanel>
+                                </Button>
+                                <Button Height="56" Width="120" Margin="8, 0" Background="Transparent" BorderBrush="Transparent">
+                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                        <materialDesign:PackIcon Kind="Code" VerticalAlignment="Center" Margin="8, 0"/>
+                                        <TextBlock Text="Website" VerticalAlignment="Center"/>
+                                    </StackPanel>
+                                </Button>
+                                <Button Height="56" Width="120" Background="Transparent" BorderBrush="Transparent">
+                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                        <materialDesign:PackIcon Kind="Cloud" VerticalAlignment="Center" Margin="8, 0"/>
+                                        <TextBlock Text="Server" VerticalAlignment="Center"/>
+                                    </StackPanel>
+                                </Button>
+                            </StackPanel>
+                            
+                        </Border>
+                        <ItemsControl Grid.Row="1" ItemsSource="{Binding MyTasks}" Margin="16">
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate DataType="{x:Type model:TaskModel}">
+                                    <Border x:Name="border" Padding="8" Margin="0, 8">
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="auto"/>
+                                                <ColumnDefinition />
+                                                <ColumnDefinition Width="auto"/>
+                                            </Grid.ColumnDefinitions>
+                                            <Border Grid.ColumnSpan="3" BorderBrush="#848484" BorderThickness="0, 0, 0, 1" Margin="16, -16" VerticalAlignment="Bottom"></Border>
+                                            <CheckBox VerticalAlignment="Center" IsChecked="{Binding IsChecked}"/>
+                                            <TextBlock Grid.Column="1" FontSize="18" FontWeight="Light" Margin="16, 0" VerticalAlignment="Center" HorizontalAlignment="Left" Text="{Binding Content}"/>
+                                            <StackPanel Orientation="Horizontal" Grid.Column="2">
+                                                <materialDesign:PackIcon Kind="Edit" Foreground="#952CAD" VerticalAlignment="Center" Margin="8, 0"/>
+                                                <materialDesign:PackIcon Kind="Delete" Foreground="OrangeRed" VerticalAlignment="Center" Margin="8, 0"/>
+                                            </StackPanel>
+                                        </Grid>
+                                    </Border>
+                                    <DataTemplate.Triggers>
+                                        <DataTrigger Binding="{Binding IsChecked}" Value="True">
+                                            <Setter TargetName="border" Property="Background" Value="Transparent"/>
+                                        </DataTrigger>
+                                    </DataTemplate.Triggers>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                    </Grid>
+                </Border>
+
+                <Border Background="White" CornerRadius="16" Margin="48">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height=".3*" />
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
+                        <Border Background="#FC940D" CornerRadius="8" Margin="16, -16, 16, 0" >
+
+                            <StackPanel Margin="16">
+                                <TextBlock Text="Employees Stats" Foreground="White" FontSize="24"/>
+                                <TextBlock Margin="0, 4" Text="Name employees on 15th Septempber 2016" Foreground="White" FontWeight="Light" FontSize="16"/>
+                            </StackPanel>
+
+                        </Border>
+                        <ListView ItemsSource="{Binding Employees}" Grid.Row="1" Margin="16">
+                            <ListView.View>
+                                <GridView AllowsColumnReorder="True">
+                                    <GridViewColumn DisplayMemberBinding="{Binding Id}" Header="ID" />
+                                    <GridViewColumn DisplayMemberBinding="{Binding Name}" Header="Name"/>
+                                    <GridViewColumn DisplayMemberBinding="{Binding Salary}" Header="Salary"/>
+                                    <GridViewColumn DisplayMemberBinding="{Binding Country}" Header="Country"/>
+                                </GridView>
+                            </ListView.View>
+                        </ListView>
+                    </Grid>
+                </Border>
+
+            </UniformGrid>
+        </Grid>
+    </Grid>
+</Window>
