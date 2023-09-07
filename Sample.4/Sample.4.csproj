@@ -1,0 +1,92 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net7.0-windows</TargetFramework>
+    <RootNamespace>Sample._4</RootNamespace>
+    <Nullable>enable</Nullable>
+    <UseWPF>true</UseWPF>
+    <ApplicationIcon>Images\logo.ico</ApplicationIcon>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Fonts\iconfont.ttf" />
+    <None Remove="Images\albumArt-0.jpg" />
+    <None Remove="Images\albumArt-1.jpg" />
+    <None Remove="Images\albumArt-10.jpg" />
+    <None Remove="Images\albumArt-11.jpg" />
+    <None Remove="Images\albumArt-12.jpg" />
+    <None Remove="Images\albumArt-13.jpg" />
+    <None Remove="Images\albumArt-14.jpg" />
+    <None Remove="Images\albumArt-15.jpg" />
+    <None Remove="Images\albumArt-16.jpg" />
+    <None Remove="Images\albumArt-17.jpg" />
+    <None Remove="Images\albumArt-2.jpg" />
+    <None Remove="Images\albumArt-3.jpg" />
+    <None Remove="Images\albumArt-4.jpg" />
+    <None Remove="Images\albumArt-5.jpg" />
+    <None Remove="Images\albumArt-6.jpg" />
+    <None Remove="Images\albumArt-7.jpg" />
+    <None Remove="Images\albumArt-8.jpg" />
+    <None Remove="Images\albumArt-9.jpg" />
+    <None Remove="Images\albumArt-default.jpg" />
+    <None Remove="Images\mainPage.png" />
+    <None Remove="Images\slideshow-0.jpg" />
+    <None Remove="Images\slideshow-1.jpg" />
+    <None Remove="Images\slideshow-2.jpg" />
+    <None Remove="Images\slideshow-3.jpg" />
+    <None Remove="Images\slideshow-4.jpg" />
+    <None Remove="Images\slideshow-5.jpg" />
+    <None Remove="Images\slideshow-6.jpg" />
+    <None Remove="Images\slideshow-7.jpg" />
+    <None Remove="Images\slideshow-8.jpg" />
+    <None Remove="Images\slideshow-9.jpg" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Images\logo.ico" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Fonts\iconfont.ttf" />
+    <Resource Include="Images\albumArt-0.jpg" />
+    <Resource Include="Images\albumArt-1.jpg" />
+    <Resource Include="Images\albumArt-10.jpg" />
+    <Resource Include="Images\albumArt-11.jpg" />
+    <Resource Include="Images\albumArt-12.jpg" />
+    <Resource Include="Images\albumArt-13.jpg" />
+    <Resource Include="Images\albumArt-14.jpg" />
+    <Resource Include="Images\albumArt-15.jpg" />
+    <Resource Include="Images\albumArt-16.jpg" />
+    <Resource Include="Images\albumArt-17.jpg" />
+    <Resource Include="Images\albumArt-2.jpg" />
+    <Resource Include="Images\albumArt-3.jpg" />
+    <Resource Include="Images\albumArt-4.jpg" />
+    <Resource Include="Images\albumArt-5.jpg" />
+    <Resource Include="Images\albumArt-6.jpg" />
+    <Resource Include="Images\albumArt-7.jpg" />
+    <Resource Include="Images\albumArt-8.jpg" />
+    <Resource Include="Images\albumArt-9.jpg" />
+    <Resource Include="Images\albumArt-default.jpg" />
+    <Resource Include="Images\mainPage.png" />
+    <Resource Include="Images\slideshow-0.jpg" />
+    <Resource Include="Images\slideshow-1.jpg" />
+    <Resource Include="Images\slideshow-2.jpg" />
+    <Resource Include="Images\slideshow-3.jpg" />
+    <Resource Include="Images\slideshow-4.jpg" />
+    <Resource Include="Images\slideshow-5.jpg" />
+    <Resource Include="Images\slideshow-6.jpg" />
+    <Resource Include="Images\slideshow-7.jpg" />
+    <Resource Include="Images\slideshow-8.jpg" />
+    <Resource Include="Images\slideshow-9.jpg" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="新文件夹\" />
+  </ItemGroup>
+
+</Project>

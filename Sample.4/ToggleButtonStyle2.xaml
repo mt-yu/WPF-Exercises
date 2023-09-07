@@ -1,0 +1,75 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <LinearGradientBrush x:Key="ButtonNormalBackgroundFill" EndPoint="0.5, 1" StartPoint="0.5, 0">
+        <GradientStop Color="#FFFFFFFF" Offset="0" />
+        <GradientStop Color="#FFF0F0EA" Offset="0.9" />
+    </LinearGradientBrush>
+
+    <SolidColorBrush x:Key="ButtonBorder" Color="#FF003C74" />
+
+    <Style x:Key="ToggleButtonStyle2" TargetType="{x:Type ToggleButton}">
+        <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+        <Setter Property="Background" Value="{StaticResource ButtonNormalBackgroundFill}" />
+        <Setter Property="Background" Value="{StaticResource ButtonBorder}" />
+        <Setter Property="HorizontalContentAlignment" Value="Center" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type ToggleButton}">
+                    <ControlTemplate.Resources>
+                        <Storyboard x:Key="OnChecked1">
+                            <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)" Storyboard.TargetName="path">
+                                <EasingColorKeyFrame KeyTime="0" Value="Transparent"/>
+                                <EasingColorKeyFrame KeyTime="0:0:0.5" Value="#ec4141"/>
+                            </ColorAnimationUsingKeyFrames>
+                            <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Shape.Stroke).(SolidColorBrush.Color)" Storyboard.TargetName="path">
+                                <EasingColorKeyFrame KeyTime="0" Value="#959595"/>
+                                <EasingColorKeyFrame KeyTime="0:0:0.5" Value="#ec4141"/>
+                            </ColorAnimationUsingKeyFrames>
+                        </Storyboard>
+                        <Storyboard x:Key="OnUnchecked1">
+                            <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)" Storyboard.TargetName="path">
+                                <EasingColorKeyFrame KeyTime="0" Value="#ec4141"/>
+                                <EasingColorKeyFrame KeyTime="0:0:0.5" Value="Transparent"/>
+                            </ColorAnimationUsingKeyFrames>
+                            <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Shape.Stroke).(SolidColorBrush.Color)" Storyboard.TargetName="path">
+                                <EasingColorKeyFrame KeyTime="0" Value="#ec4141"/>
+                                <EasingColorKeyFrame KeyTime="0:0:0.5" Value="#959595"/>
+                            </ColorAnimationUsingKeyFrames>
+                        </Storyboard>
+                    </ControlTemplate.Resources>
+                    <Grid>
+                        <Border Width="24" Height="24">
+                            <Canvas>
+                                <Path x:Name="path" Stroke="#959595" Fill="Transparent" StrokeThickness="2" Width="16" Height="16" Stretch="Uniform" VerticalAlignment="Center" >
+                                    <Path.Data>
+                                        <Geometry>M512 901.746939c-13.583673 0-26.122449-4.179592-37.093878-13.061225-8.881633-7.314286-225.697959-175.020408-312.424489-311.379592C133.746939 532.37551 94.040816 471.24898 94.040816 384.522449c0-144.718367 108.146939-262.269388 240.326531-262.269388 67.395918 0 131.657143 30.82449 177.632653 84.636735 45.453061-54.334694 109.191837-84.636735 177.110204-84.636735 132.702041 0 240.326531 117.55102 240.326531 262.269388 0 85.159184-37.093878 143.673469-67.395919 191.216327l-1.044898 1.567346c-86.726531 136.359184-303.542857 304.587755-312.424489 311.379592-10.44898 8.359184-22.987755 13.061224-36.571429 13.061225z</Geometry>
+                                    </Path.Data>
+                                </Path>
+                            </Canvas>
+                        </Border>
+                    </Grid>
+
+                    <ControlTemplate.Triggers>
+                        <!--静态-->
+                        <!--<Trigger Property="IsChecked" Value="True">
+                            <Setter Property="Fill" Value="#ec4141" TargetName="path1"/>
+                            <Setter Property="Stroke" Value="#ec4141" TargetName="path1"/>
+                        </Trigger>
+                        <Trigger Property="IsChecked" Value="False">
+                            <Setter Property="Fill" Value="Transparent" TargetName="path1"/>
+                        </Trigger>-->
+                        <!--动画-->
+                        <EventTrigger RoutedEvent="ToggleButton.Checked">
+                            <BeginStoryboard Storyboard="{StaticResource OnChecked1}"/>
+                        </EventTrigger>
+                        <EventTrigger RoutedEvent="ToggleButton.Unchecked">
+                            <BeginStoryboard Storyboard="{StaticResource OnUnchecked1}"/>
+                        </EventTrigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+</ResourceDictionary>
