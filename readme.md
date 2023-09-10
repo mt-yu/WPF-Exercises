@@ -1,6 +1,6 @@
 ## bilibili 学习 : wpf, up 大佬(微软系列技术教程): https://space.bilibili.com/32497462 提交中的代码up讲解视频如下图框选部分
 
-![](./Bilibili视频.png)
+![](./Images/Bilibili视频.png)
 
 ### MyToDo 笔记
 一. 创建项目结构
@@ -114,3 +114,18 @@
 
 ### Samples
 #### Sample.1
+![](./Images/Sample1.png)
+#### Sample.2
+![](./Images/Sample2.png)
+#### Sample.3
+![](./Images/Sample3.png)
+#### Sample.4
+![](./Images/Sample4.png)
+#### Sample.5
+![](./Images/Sample5.png)
+#### Sample.6
+![](./Images/Sample6.png)
+#### Sample.7
+![](./Images/Sample7.png)
+#### Sample.8
+![](./Images/Sample8.png)
