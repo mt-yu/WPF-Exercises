@@ -1,3 +1,8 @@
+## bilibili 学习 : wpf, up 大佬(微软系列技术教程): https://space.bilibili.com/32497462 提交中的代码up讲解视频如下图框选部分
+
+![](./Bilibili视频.png)
+
+### MyToDo 笔记
 一. 创建项目结构
 1. 创建wpf 项目
 2. 安装 prism.dryioc mvvm 以及 ioc 框架
@@ -107,3 +112,5 @@
 通过 iis 部署， 需要除了 打开对应的iis 服务之外 还要装 -> "Hosting Bundle" https://dotnet.microsoft.com/zh-cn/download/dotnet/6.0 根据对应的大版本选择 即可 (参考文章: https://blog.csdn.net/ChaITSimpleLove/article/details/116143193) 
 
 
+### Samples
+#### Sample.1
