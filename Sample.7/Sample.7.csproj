@@ -1,0 +1,51 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net7.0-windows</TargetFramework>
+    <RootNamespace>Sample._7</RootNamespace>
+    <Nullable>enable</Nullable>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Fonts\iconfont.ttf" />
+    <None Remove="Images\buttonImage.png" />
+    <None Remove="Images\centerImage.png" />
+    <None Remove="Images\drop.png" />
+    <None Remove="Images\img3d.png" />
+    <None Remove="Images\leftback.png" />
+    <None Remove="Images\leftImage.png" />
+    <None Remove="Images\leftImageSub.png" />
+    <None Remove="Images\rightImage.png" />
+    <None Remove="Images\timeback.png" />
+    <None Remove="Images\topback.png" />
+    <None Remove="Images\topImage.png" />
+    <None Remove="Images\vs.jpg" />
+    <None Remove="Images\中部选择栏选中-1.png" />
+    <None Remove="Images\中部选择栏选中-2.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="NetCore5.0.Microsoft.Expression.Drawing" Version="1.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Fonts\iconfont.ttf" />
+    <Resource Include="Images\buttonImage.png" />
+    <Resource Include="Images\centerImage.png" />
+    <Resource Include="Images\drop.png" />
+    <Resource Include="Images\img3d.png" />
+    <Resource Include="Images\leftback.png" />
+    <Resource Include="Images\leftImage.png" />
+    <Resource Include="Images\leftImageSub.png" />
+    <Resource Include="Images\rightImage.png" />
+    <Resource Include="Images\timeback.png" />
+    <Resource Include="Images\topback.png" />
+    <Resource Include="Images\topImage.png" />
+    <Resource Include="Images\vs.jpg" />
+    <Resource Include="Images\中部选择栏选中-1.png" />
+    <Resource Include="Images\中部选择栏选中-2.png" />
+  </ItemGroup>
+
+</Project>
