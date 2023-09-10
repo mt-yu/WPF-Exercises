@@ -85,8 +85,4 @@
     <Resource Include="Images\slideshow-9.jpg" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="新文件夹\" />
-  </ItemGroup>
-
 </Project>
