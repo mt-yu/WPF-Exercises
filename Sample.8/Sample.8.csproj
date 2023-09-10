@@ -9,6 +9,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Models\**" />
+    <EmbeddedResource Remove="Models\**" />
+    <None Remove="Models\**" />
+    <Page Remove="Models\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Remove="Fonts\iconfont.ttf" />
     <None Remove="Fonts\iconfont2.ttf" />
     <None Remove="Images\logo.jpg" />
@@ -27,10 +34,6 @@
     <Resource Include="Images\logo.jpg" />
     <Resource Include="Images\microsoft.png" />
     <Resource Include="Images\水冠.jpg" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Models\" />
   </ItemGroup>
 
 </Project>
